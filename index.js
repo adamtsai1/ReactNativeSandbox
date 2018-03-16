@@ -1,4 +1,18 @@
-import { AppRegistry } from 'react-native';
-import App from './App';
+// Import a library to help create a component
+import React from 'react';
+import { AppRegistry, View } from 'react-native';
 
+// Components
+import AlbumList from './src/components/AlbumList';
+import Header from './src/components/Header';
+
+// Create a component
+const App = () => (
+    <View>
+        <Header headerText="Albums" />
+        <AlbumList />
+    </View>
+);
+
+// Render it to the device
 AppRegistry.registerComponent('ReactNativeOnlineCourse', () => App);
