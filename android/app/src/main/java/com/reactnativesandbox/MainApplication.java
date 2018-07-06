@@ -1,4 +1,4 @@
-package com.reactnativeonlinecourse;
+package com.reactnativesandbox;
 
 import android.app.Application;
 

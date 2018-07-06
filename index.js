@@ -1,18 +1,4 @@
-// Import a library to help create a component
-import React from 'react';
-import { AppRegistry, View } from 'react-native';
+import { AppRegistry } from 'react-native';
+import App from './src/App';
 
-// Components
-import AlbumList from './src/components/AlbumList';
-import Header from './src/components/Header';
-
-// Create a component
-const App = () => (
-    <View style={{ flex: 1 }}>
-        <Header headerText="Albums" />
-        <AlbumList />
-    </View>
-);
-
-// Render it to the device
-AppRegistry.registerComponent('ReactNativeOnlineCourse', () => App);
+AppRegistry.registerComponent('reactnativesandbox', () => App);

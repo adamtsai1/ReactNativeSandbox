@@ -1,3 +1,3 @@
-rootProject.name = 'ReactNativeOnlineCourse'
+rootProject.name = 'reactnativesandbox'
 
 include ':app'

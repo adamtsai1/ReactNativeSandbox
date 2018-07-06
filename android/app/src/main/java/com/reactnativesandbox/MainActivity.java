@@ -1,4 +1,4 @@
-package com.reactnativeonlinecourse;
+package com.reactnativesandbox;
 
 import com.facebook.react.ReactActivity;
 
@@ -10,6 +10,6 @@ public class MainActivity extends ReactActivity {
      */
     @Override
     protected String getMainComponentName() {
-        return "ReactNativeOnlineCourse";
+        return "reactnativesandbox";
     }
 }
