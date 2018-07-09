@@ -3,13 +3,16 @@ import { TextInput } from 'react-native';
 import PropTypes from 'prop-types';
 
 /* eslint-disable import/prefer-default-export */
-export const Textbox = ({ children }) => {
+export const Textbox = ({ value, secureTextEntry, onChangeText }) => {
     const { textboxStyles } = styles;
 
     return (
-        <TextInput style={textboxStyles}>
-            {children}
-        </TextInput>
+        <TextInput
+            secureTextEntry={secureTextEntry}
+            style={textboxStyles}
+            value={value}
+            onChangeText={onChangeText}
+        />
     );
 };
 

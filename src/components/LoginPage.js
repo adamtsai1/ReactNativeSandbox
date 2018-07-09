@@ -1,22 +1,40 @@
 // Dependencies
-import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 // Components
 import { Button, Container, Label, Page, Textbox } from './common';
 
-export default class LoginPage extends Component {
+// Actions
+import { changePasswordText, changeUserNameText } from '../actions/AuthActions';
+
+class LoginPage extends Component {
+    constructor() {
+        super();
+        this.onPasswordChanged = this.onPasswordChanged.bind(this);
+        this.onUserNameChanged = this.onUserNameChanged.bind(this);
+    }
+
+    onPasswordChanged(text) {
+        this.props.changePasswordText(text);
+    }
+
+    onUserNameChanged(text) {
+        this.props.changeUserNameText(text);
+    }
+
     render() {
         const { passwordButtonContainerStyle, submitButtonContainerStyle } = styles;
 
         return (
             <Page>
                 <Container style={{ marginBottom: 4 }}>
-                    <Label>Username</Label>
+                    <Label>User Name</Label>
                 </Container>
 
                 <Container style={{ marginBottom: 16 }}>
-                    <Textbox />
+                    <Textbox onChangeText={this.onUserNameChanged} />
                 </Container>
 
                 <Container style={{ marginBottom: 4 }}>
@@ -24,7 +42,7 @@ export default class LoginPage extends Component {
                 </Container>
 
                 <Container style={{ marginBottom: 26 }}>
-                    <Textbox />
+                    <Textbox secureTextEntry onChangeText={this.onPasswordChanged} />
                 </Container>
 
                 <Container style={submitButtonContainerStyle}>
@@ -45,6 +63,8 @@ export default class LoginPage extends Component {
 
 LoginPage.propTypes = {
     navigation: PropTypes.object,
+    changePasswordText: PropTypes.func,
+    changeUserNameText: PropTypes.func,
 };
 
 const styles = {
@@ -53,3 +73,5 @@ const styles = {
         marginBottom: 8,
     },
 };
+
+export default connect(null, { changePasswordText, changeUserNameText })(LoginPage);

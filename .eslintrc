@@ -1,6 +1,7 @@
 {
     "extends": "airbnb",
     "rules": {
+        "import/prefer-default-export": 0,
         "indent": ["error", 4, { "SwitchCase": 1 }],
         "react/jsx-filename-extension": 0,
         "react/jsx-indent": [2, 4],
