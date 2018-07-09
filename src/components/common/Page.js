@@ -40,5 +40,6 @@ const styles = {
     },
     outerPageStyle: {
         backgroundColor: '#fff',
+        flex: 1,
     },
 };

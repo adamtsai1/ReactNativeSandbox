@@ -4,7 +4,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 // Components
-import { Button, Container, Label, Page, Textbox } from './common';
+import {
+    Button,
+    Container,
+    Form,
+    Label,
+    Page,
+    Textbox,
+} from './common';
 
 // Actions
 import { changePasswordText, changeUserNameText } from '../actions/AuthActions';
@@ -29,21 +36,17 @@ class LoginPage extends Component {
 
         return (
             <Page title="Login">
-                <Container style={{ marginBottom: 4 }}>
+                <Form>
                     <Label>User Name</Label>
-                </Container>
+                    <Container style={{ marginBottom: 16 }}>
+                        <Textbox onChangeText={this.onUserNameChanged} />
+                    </Container>
 
-                <Container style={{ marginBottom: 16 }}>
-                    <Textbox onChangeText={this.onUserNameChanged} />
-                </Container>
-
-                <Container style={{ marginBottom: 4 }}>
                     <Label>Password</Label>
-                </Container>
-
-                <Container style={{ marginBottom: 26 }}>
-                    <Textbox secureTextEntry onChangeText={this.onPasswordChanged} />
-                </Container>
+                    <Container>
+                        <Textbox secureTextEntry onChangeText={this.onPasswordChanged} />
+                    </Container>
+                </Form>
 
                 <Container style={{ marginBottom: 8 }}>
                     <Button disabled={submitButtonDisabled} onPress={() => alert('Submit')}>
@@ -52,7 +55,7 @@ class LoginPage extends Component {
                 </Container>
 
                 <Container>
-                    <Button onPress={() => alert('Forgot password')}>
+                    <Button onPress={() => this.props.navigation.navigate('PasswordReset')}>
                         Forgot Password?
                     </Button>
                 </Container>
@@ -72,7 +75,6 @@ LoginPage.propTypes = {
 const styles = {};
 
 const mapStateToProps = (state) => {
-    console.log('state', state);
     return {
         password: state.auth.password,
         userName: state.auth.userName,

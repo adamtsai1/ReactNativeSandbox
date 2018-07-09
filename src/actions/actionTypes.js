@@ -1,2 +1,3 @@
-export const CHANGE_PASSWORD_TEXT = 'change_password_text';
-export const CHANGE_USER_NAME_TEXT = 'change_user_name_text';
+export const CHANGE_PASSWORD_RESET_EMAIL = 'change_password_reset_email';
+export const CHANGE_PASSWORD = 'change_password';
+export const CHANGE_USER_NAME = 'change_user_name';

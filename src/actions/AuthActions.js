@@ -1,15 +1,22 @@
-import { CHANGE_PASSWORD_TEXT, CHANGE_USER_NAME_TEXT } from './actionTypes';
+/* eslint-disable arrow-parens */
 
-export const changePasswordText = (password) => {
-    return {
-        type: CHANGE_PASSWORD_TEXT,
-        payload: password,
-    };
-};
+import {
+    CHANGE_PASSWORD,
+    CHANGE_PASSWORD_RESET_EMAIL,
+    CHANGE_USER_NAME,
+} from './actionTypes';
 
-export const changeUserNameText = (userName) => {
-    return {
-        type: CHANGE_USER_NAME_TEXT,
-        payload: userName,
-    };
-};
+export const changePasswordResetEmail = (email) => ({
+    type: CHANGE_PASSWORD_RESET_EMAIL,
+    payload: email,
+});
+
+export const changePasswordText = (password) => ({
+    type: CHANGE_PASSWORD,
+    payload: password,
+});
+
+export const changeUserNameText = (userName) => ({
+    type: CHANGE_USER_NAME,
+    payload: userName,
+});

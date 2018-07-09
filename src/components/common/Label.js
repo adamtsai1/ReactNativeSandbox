@@ -3,7 +3,7 @@ import { Text } from 'react-native';
 
 export const Label = ({ children }) => {
     return (
-        <Text>
+        <Text style={{ marginBottom: 4 }}>
             {children}
         </Text>
     );
