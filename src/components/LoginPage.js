@@ -25,7 +25,7 @@ class LoginPage extends Component {
     }
 
     render() {
-        const { passwordButtonContainerStyle, submitButtonContainerStyle } = styles;
+        const submitButtonDisabled = this.props.userName.length === 0 || this.props.password.length === 0;
 
         return (
             <Page>
@@ -45,13 +45,13 @@ class LoginPage extends Component {
                     <Textbox secureTextEntry onChangeText={this.onPasswordChanged} />
                 </Container>
 
-                <Container style={submitButtonContainerStyle}>
-                    <Button onPress={() => alert('Submit')}>
+                <Container style={{ marginBottom: 8 }}>
+                    <Button disabled={submitButtonDisabled} onPress={() => alert('Submit')}>
                         Submit
                     </Button>
                 </Container>
 
-                <Container style={passwordButtonContainerStyle}>
+                <Container>
                     <Button onPress={() => alert('Forgot password')}>
                         Forgot Password?
                     </Button>
@@ -63,15 +63,20 @@ class LoginPage extends Component {
 
 LoginPage.propTypes = {
     navigation: PropTypes.object,
+    password: PropTypes.string,
+    userName: PropTypes.string,
     changePasswordText: PropTypes.func,
     changeUserNameText: PropTypes.func,
 };
 
-const styles = {
-    passwordButtonContainerStyle: {},
-    submitButtonContainerStyle: {
-        marginBottom: 8,
-    },
+const styles = {};
+
+const mapStateToProps = (state) => {
+    console.log('state', state);
+    return {
+        password: state.auth.password,
+        userName: state.auth.userName,
+    };
 };
 
-export default connect(null, { changePasswordText, changeUserNameText })(LoginPage);
+export default connect(mapStateToProps, { changePasswordText, changeUserNameText })(LoginPage);

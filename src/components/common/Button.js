@@ -3,10 +3,18 @@ import { Text, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 
 /* eslint-disable import/prefer-default-export */
-export const Button = ({ children, onPress }) => {
+export const Button = ({ children, disabled, onPress }) => {
     const { buttonStyle, buttonTextStyle, textStyle } = styles;
+
+    buttonStyle.backgroundColor = disabled ? '#ccc' : '#d1de3a';
+
     return (
-        <TouchableOpacity style={buttonStyle} textStyle={buttonTextStyle} onPress={onPress}>
+        <TouchableOpacity
+            disabled={disabled}
+            style={buttonStyle}
+            textStyle={buttonTextStyle}
+            onPress={onPress}
+        >
             <Text style={textStyle}>
                 {children}
             </Text>
@@ -15,13 +23,14 @@ export const Button = ({ children, onPress }) => {
 };
 
 Button.propTypes = {
+    children: PropTypes.string,
+    disabled: PropTypes.bool,
     onPress: PropTypes.func,
 };
 
 const styles = {
     buttonStyle: {
         alignSelf: 'stretch',
-        backgroundColor: '#d1de3a',
         borderRadius: 5,
         flex: 1,
     },

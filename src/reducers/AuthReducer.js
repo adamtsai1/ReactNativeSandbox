@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { UPDATE_USER_NAME } from '../actions/actionTypes';
+import { CHANGE_PASSWORD_TEXT, CHANGE_USER_NAME_TEXT } from '../actions/actionTypes';
 
 const INITIAL_STATE = {
     password: '',
@@ -8,6 +8,9 @@ const INITIAL_STATE = {
 
 const password = (state = INITIAL_STATE.password, action) => {
     switch (action.type) {
+        case CHANGE_PASSWORD_TEXT:
+            return action.payload;
+
         default:
             return state;
     }
@@ -15,7 +18,7 @@ const password = (state = INITIAL_STATE.password, action) => {
 
 const userName = (state = INITIAL_STATE.userName, action) => {
     switch (action.type) {
-        case UPDATE_USER_NAME:
+        case CHANGE_USER_NAME_TEXT:
             return action.payload;
 
         default:
