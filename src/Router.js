@@ -5,7 +5,7 @@ import { createStackNavigator } from 'react-navigation';
 // Components
 import DashboardPage from './components/DashboardPage';
 import LoginPage from './components/LoginPage';
-import Header from './components/common/Header';
+import { Header } from './components/common';
 
 const RouterComponent = createStackNavigator({
     Dashboard: DashboardPage,

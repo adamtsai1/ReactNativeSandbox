@@ -1,21 +1,31 @@
 // Dependencies
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 
 // Components
-import { Button, Container } from './common';
-
-// Styles
-import commonStyles from '../styles/common';
+import { Button, Container, Label, Page, Textbox } from './common';
 
 export default class LoginPage extends Component {
     render() {
-        const { containerStyle, passwordButtonContainerStyle, submitButtonContainerStyle } = styles;
+        const { passwordButtonContainerStyle, submitButtonContainerStyle } = styles;
 
         return (
-            <View style={[commonStyles.container, containerStyle]}>
-                {/* <Text>Login Page</Text> */}
+            <Page>
+                <Container style={{ marginBottom: 4 }}>
+                    <Label>Username</Label>
+                </Container>
+
+                <Container style={{ marginBottom: 16 }}>
+                    <Textbox />
+                </Container>
+
+                <Container style={{ marginBottom: 4 }}>
+                    <Label>Password</Label>
+                </Container>
+
+                <Container style={{ marginBottom: 26 }}>
+                    <Textbox />
+                </Container>
 
                 <Container style={submitButtonContainerStyle}>
                     <Button onPress={() => alert('Submit')}>
@@ -28,7 +38,7 @@ export default class LoginPage extends Component {
                         Forgot Password?
                     </Button>
                 </Container>
-            </View>
+            </Page>
         );
     }
 }
@@ -38,7 +48,6 @@ LoginPage.propTypes = {
 };
 
 const styles = {
-    containerStyle: {},
     passwordButtonContainerStyle: {},
     submitButtonContainerStyle: {
         marginBottom: 8,

@@ -6,7 +6,9 @@ import { Dimensions, Image, View } from 'react-native';
 import { FM_TEXT_LOGO } from '../../images';
 
 const win = Dimensions.get('window');
-const Header = () => {
+
+/* eslint-disable import/prefer-default-export */
+export const Header = () => {
     const { containerStyle, logoStyle } = styles;
     return (
         <View style={containerStyle}>
@@ -16,8 +18,6 @@ const Header = () => {
 };
 
 Header.propTypes = {};
-
-export default Header;
 
 const styles = {
     containerStyle: {},
