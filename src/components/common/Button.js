@@ -2,7 +2,6 @@ import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 
-/* eslint-disable import/prefer-default-export */
 export const Button = ({ children, disabled, onPress }) => {
     const { buttonStyle, buttonTextStyle, textStyle } = styles;
 

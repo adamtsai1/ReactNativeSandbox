@@ -28,7 +28,7 @@ class LoginPage extends Component {
         const submitButtonDisabled = this.props.userName.length === 0 || this.props.password.length === 0;
 
         return (
-            <Page>
+            <Page title="Login">
                 <Container style={{ marginBottom: 4 }}>
                     <Label>User Name</Label>
                 </Container>
