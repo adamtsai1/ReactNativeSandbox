@@ -71,7 +71,7 @@ class PasswordResetPage extends Component {
                 </Form>
 
                 <Container>
-                    <Button onPress={() => alert('Login')}>Login</Button>
+                    <Button onPress={() => this.props.navigation.navigate('Login')}>Login</Button>
                 </Container>
             </View>
         );
@@ -85,10 +85,16 @@ class PasswordResetPage extends Component {
 }
 
 PasswordResetPage.propTypes = {
-    changePasswordResetEmail: PropTypes.func,
-    initializePasswordReset: PropTypes.func,
+    // Navigation
+    navigation: PropTypes.object,
+
+    // State
     passwordResetEmail: PropTypes.string,
     passwordResetSuccess: PropTypes.bool,
+
+    // Actions
+    changePasswordResetEmail: PropTypes.func,
+    initializePasswordReset: PropTypes.func,
     submitPasswordReset: PropTypes.func,
 };
 

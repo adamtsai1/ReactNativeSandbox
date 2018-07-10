@@ -4,6 +4,6 @@ export const resetPassword = (email) => {
             resolve({
                 data: { success: true, email },
             });
-        }, 3000);
+        }, 2000);
     });
 };
