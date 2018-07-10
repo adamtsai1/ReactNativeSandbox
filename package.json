@@ -1,5 +1,5 @@
 {
-  "name": "reactnativesandbox",
+  "name": "Foster Made Timeoff",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -10,6 +10,7 @@
     "prop-types": "^15.6.2",
     "react": "16.3.1",
     "react-native": "0.55.4",
+    "react-native-loading-spinner-overlay": "^0.5.2",
     "react-navigation": "^2.5.3",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",

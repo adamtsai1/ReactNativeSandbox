@@ -14,7 +14,7 @@ import {
 } from './common';
 
 // Actions
-import { changePasswordText, changeUserNameText } from '../actions/AuthActions';
+import { changePasswordText, changeUserNameText } from '../actions/authActions';
 
 class LoginPage extends Component {
     constructor() {

@@ -14,7 +14,7 @@ import {
 } from './common';
 
 // Actions
-import { changePasswordResetEmail } from '../actions/AuthActions';
+import { changePasswordResetEmail, submitPasswordReset } from '../actions/authActions';
 
 // Utility
 import { validateEmail } from '../utility';
@@ -31,7 +31,7 @@ class PasswordResetPage extends Component {
     }
 
     onSubmitButtonPressed() {
-        
+        this.props.submitPasswordReset(this.props.passwordResetEmail);
     }
 
     render() {
@@ -56,10 +56,14 @@ class PasswordResetPage extends Component {
 PasswordResetPage.propTypes = {
     changePasswordResetEmail: PropTypes.func,
     passwordResetEmail: PropTypes.string,
+    submitPasswordReset: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
     passwordResetEmail: state.auth.passwordResetEmail,
 });
 
-export default connect(mapStateToProps, { changePasswordResetEmail })(PasswordResetPage);
+export default connect(mapStateToProps, {
+    changePasswordResetEmail,
+    submitPasswordReset,
+})(PasswordResetPage);

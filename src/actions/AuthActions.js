@@ -1,22 +1,52 @@
 /* eslint-disable arrow-parens */
+import {
+    API_ERROR,
+    API_REQUEST,
+    API_SUCCESS,
+} from './appActionTypes';
 
 import {
-    CHANGE_PASSWORD,
-    CHANGE_PASSWORD_RESET_EMAIL,
-    CHANGE_USER_NAME,
-} from './actionTypes';
+    LOGIN_PASSWORD_CHANGE,
+    LOGIN_USER_NAME_CHANGE,
+    PASSWORD_RESET_EMAIL_CHANGE,
+    PASSWORD_RESET_SUBMIT,
+} from './authActionTypes';
+
+import { resetPassword } from '../api';
 
 export const changePasswordResetEmail = (email) => ({
-    type: CHANGE_PASSWORD_RESET_EMAIL,
+    type: PASSWORD_RESET_EMAIL_CHANGE,
     payload: email,
 });
 
 export const changePasswordText = (password) => ({
-    type: CHANGE_PASSWORD,
+    type: LOGIN_PASSWORD_CHANGE,
     payload: password,
 });
 
 export const changeUserNameText = (userName) => ({
-    type: CHANGE_USER_NAME,
+    type: LOGIN_USER_NAME_CHANGE,
     payload: userName,
 });
+
+export const submitPasswordReset = (email) => (dispatch) => {
+    dispatch({ type: PASSWORD_RESET_SUBMIT });
+    dispatch({
+        type: API_REQUEST,
+        payload: email,
+    });
+
+    resetPassword(email)
+        .then(response => {
+            dispatch({
+                type: API_SUCCESS,
+                payload: response.data,
+            });
+        })
+        .catch(response => {
+            dispatch({
+                type: API_ERROR,
+                payload: response.error,
+            });
+        });
+};
