@@ -1,6 +1,7 @@
 // Dependencies
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { Text, View } from 'react-native';
 import { connect } from 'react-redux';
 
 // Components
@@ -14,7 +15,7 @@ import {
 } from './common';
 
 // Actions
-import { changePasswordResetEmail, submitPasswordReset } from '../actions/authActions';
+import { changePasswordResetEmail, initializePasswordReset, submitPasswordReset } from '../actions/authActions';
 
 // Utility
 import { validateEmail } from '../utility';
@@ -24,6 +25,10 @@ class PasswordResetPage extends Component {
         super();
         this.onEmailChanged = this.onEmailChanged.bind(this);
         this.onSubmitButtonPressed = this.onSubmitButtonPressed.bind(this);
+    }
+
+    componentWillMount() {
+        this.props.initializePasswordReset();
     }
 
     onEmailChanged(text) {
@@ -36,8 +41,8 @@ class PasswordResetPage extends Component {
 
     render() {
         const submitButtonDisabled = this.props.passwordResetEmail.trim().length === 0 || !validateEmail(this.props.passwordResetEmail);
-        return (
-            <Page title="Password Reset">
+        const passwordResetContent = !this.props.passwordResetSuccess ? (
+            <View>
                 <Form>
                     <Label>Email</Label>
                     <Container>
@@ -48,6 +53,22 @@ class PasswordResetPage extends Component {
                 <Container>
                     <Button disabled={submitButtonDisabled} onPress={this.onSubmitButtonPressed}>Submit</Button>
                 </Container>
+            </View>
+        ) : (
+            <View>
+                <Form>
+                    <Text>Submitted</Text>
+                </Form>
+
+                <Container>
+                    <Button onPress={() => alert('Login')}>Login</Button>
+                </Container>
+            </View>
+        );
+
+        return (
+            <Page title="Password Reset">
+                {passwordResetContent}
             </Page>
         );
     }
@@ -55,15 +76,19 @@ class PasswordResetPage extends Component {
 
 PasswordResetPage.propTypes = {
     changePasswordResetEmail: PropTypes.func,
+    initializePasswordReset: PropTypes.func,
     passwordResetEmail: PropTypes.string,
+    passwordResetSuccess: PropTypes.bool,
     submitPasswordReset: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
     passwordResetEmail: state.auth.passwordResetEmail,
+    passwordResetSuccess: state.auth.passwordResetSuccess,
 });
 
 export default connect(mapStateToProps, {
     changePasswordResetEmail,
+    initializePasswordReset,
     submitPasswordReset,
 })(PasswordResetPage);

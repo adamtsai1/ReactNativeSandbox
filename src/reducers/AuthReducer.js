@@ -3,19 +3,32 @@ import {
     LOGIN_PASSWORD_CHANGE,
     LOGIN_USER_NAME_CHANGE,
     PASSWORD_RESET_EMAIL_CHANGE,
+    PASSWORD_RESET_INIT,
     PASSWORD_RESET_SUBMIT,
+    PASSWORD_RESET_SUCCESS,
 } from '../actions/authActionTypes';
 
 const INITIAL_STATE = {
     loading: false,
-    password: '',
+    loginPassword: '',
+    loginUserName: '',
     passwordResetEmail: '',
-    userName: '',
+    passwordResetSuccess: false,
 };
 
-const password = (state = INITIAL_STATE.password, action) => {
+const loginPassword = (state = INITIAL_STATE.loginPassword, action) => {
     switch (action.type) {
         case LOGIN_PASSWORD_CHANGE:
+            return action.payload;
+
+        default:
+            return state;
+    }
+};
+
+const loginUserName = (state = INITIAL_STATE.loginUserName, action) => {
+    switch (action.type) {
+        case LOGIN_USER_NAME_CHANGE:
             return action.payload;
 
         default:
@@ -28,7 +41,7 @@ const passwordResetEmail = (state = INITIAL_STATE.passwordResetEmail, action) =>
         case PASSWORD_RESET_EMAIL_CHANGE:
             return action.payload;
 
-        case PASSWORD_RESET_SUBMIT:
+        case PASSWORD_RESET_INIT:
             return '';
 
         default:
@@ -36,10 +49,13 @@ const passwordResetEmail = (state = INITIAL_STATE.passwordResetEmail, action) =>
     }
 };
 
-const userName = (state = INITIAL_STATE.userName, action) => {
+const passwordResetSuccess = (state = INITIAL_STATE.passwordResetSuccess, action) => {
     switch (action.type) {
-        case LOGIN_USER_NAME_CHANGE:
-            return action.payload;
+        case PASSWORD_RESET_INIT:
+            return false;
+
+        case PASSWORD_RESET_SUCCESS:
+            return true;
 
         default:
             return state;
@@ -47,9 +63,10 @@ const userName = (state = INITIAL_STATE.userName, action) => {
 };
 
 const authReducer = combineReducers({
-    password,
+    loginPassword,
+    loginUserName,
     passwordResetEmail,
-    userName,
+    passwordResetSuccess,
 });
 
 export default authReducer;

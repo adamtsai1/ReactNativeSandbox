@@ -9,7 +9,9 @@ import {
     LOGIN_PASSWORD_CHANGE,
     LOGIN_USER_NAME_CHANGE,
     PASSWORD_RESET_EMAIL_CHANGE,
+    PASSWORD_RESET_INIT,
     PASSWORD_RESET_SUBMIT,
+    PASSWORD_RESET_SUCCESS,
 } from './authActionTypes';
 
 import { resetPassword } from '../api';
@@ -29,6 +31,10 @@ export const changeUserNameText = (userName) => ({
     payload: userName,
 });
 
+export const initializePasswordReset = () => ({
+    type: PASSWORD_RESET_INIT,
+});
+
 export const submitPasswordReset = (email) => (dispatch) => {
     dispatch({ type: PASSWORD_RESET_SUBMIT });
     dispatch({
@@ -38,6 +44,7 @@ export const submitPasswordReset = (email) => (dispatch) => {
 
     resetPassword(email)
         .then(response => {
+            dispatch({ type: PASSWORD_RESET_SUCCESS });
             dispatch({
                 type: API_SUCCESS,
                 payload: response.data,

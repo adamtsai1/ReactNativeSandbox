@@ -76,8 +76,8 @@ const styles = {};
 
 const mapStateToProps = (state) => {
     return {
-        password: state.auth.password,
-        userName: state.auth.userName,
+        password: state.auth.loginPassword,
+        userName: state.auth.loginUserName,
     };
 };
 
