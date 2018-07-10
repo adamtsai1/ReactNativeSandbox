@@ -7,6 +7,7 @@ import {
 
 import {
     LOGIN_PASSWORD_CHANGE,
+    LOGIN_SUBMIT,
     LOGIN_USER_NAME_CHANGE,
     PASSWORD_RESET_EMAIL_CHANGE,
     PASSWORD_RESET_INIT,
@@ -34,6 +35,13 @@ export const changeUserNameText = (userName) => ({
 export const initializePasswordReset = () => ({
     type: PASSWORD_RESET_INIT,
 });
+
+export const submitLogin = (userName, password) => (dispatch) => {
+    dispatch({ type: LOGIN_SUBMIT });
+    dispatch({ type: API_REQUEST });
+
+    
+};
 
 export const submitPasswordReset = (email) => (dispatch) => {
     dispatch({ type: PASSWORD_RESET_SUBMIT });

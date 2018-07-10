@@ -1,4 +1,4 @@
-package com.reactnativesandbox;
+package com.fostermadetimeoff;
 
 import android.app.Application;
 

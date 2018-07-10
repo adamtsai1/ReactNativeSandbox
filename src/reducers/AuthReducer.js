@@ -4,7 +4,6 @@ import {
     LOGIN_USER_NAME_CHANGE,
     PASSWORD_RESET_EMAIL_CHANGE,
     PASSWORD_RESET_INIT,
-    PASSWORD_RESET_SUBMIT,
     PASSWORD_RESET_SUCCESS,
 } from '../actions/authActionTypes';
 
