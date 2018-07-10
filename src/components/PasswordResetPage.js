@@ -57,7 +57,17 @@ class PasswordResetPage extends Component {
         ) : (
             <View>
                 <Form>
-                    <Text>Submitted</Text>
+                    <Container style={{ marginBottom: 16 }}>
+                        <Text style={{ flex: 1 }}>
+                            {'We\'ve emailed you instructions to reset your password, if an account exists with the email you entered. You should receive them shortly.'}
+                        </Text>
+                    </Container>
+
+                    <Container>
+                        <Text style={{ flex: 1 }}>
+                            {'If you don\'t receive an email, please make sure you\'ve entered the address you registered with, and check your spam folder.'}
+                        </Text>
+                    </Container>
                 </Form>
 
                 <Container>

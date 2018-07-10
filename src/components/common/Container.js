@@ -1,7 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
 
-/* eslint-disable import/prefer-default-export */
 export const Container = ({ children, style }) => {
     const { containerStyle } = styles;
     return (
