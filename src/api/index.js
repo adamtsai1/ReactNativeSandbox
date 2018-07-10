@@ -17,6 +17,8 @@ export const resetPassword = (email) => {
 
 const simulateDelay = (delay) => {
     return new Promise((resolve, reject) => {
-        resolve();
-    }, delay);
+        setTimeout(() => {
+            resolve();
+        }, delay);
+    });
 };
