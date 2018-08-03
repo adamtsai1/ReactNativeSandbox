@@ -16,7 +16,7 @@ export default class App extends Component {
             {},
             applyMiddleware(
                 ReduxThunk,
-                // loggerMiddleware,
+                loggerMiddleware,
             ));
 
         return (

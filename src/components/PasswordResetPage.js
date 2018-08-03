@@ -19,7 +19,8 @@ import {
     changePasswordResetEmail,
     initializeLogin,
     initializePasswordReset,
-    submitPasswordReset } from '../actions/authActions';
+    submitPasswordReset,
+} from '../actions/authActions';
 
 // Utility
 import { validateEmail } from '../utility';

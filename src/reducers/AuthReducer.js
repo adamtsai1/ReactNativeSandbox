@@ -1,7 +1,10 @@
 import { combineReducers } from 'redux';
 import {
+    LOGIN_ERROR,
     LOGIN_INIT,
     LOGIN_PASSWORD_CHANGE,
+    LOGIN_SUBMIT,
+    LOGIN_SUCCESS,
     LOGIN_USER_NAME_CHANGE,
     PASSWORD_RESET_EMAIL_CHANGE,
     PASSWORD_RESET_INIT,
@@ -9,11 +12,36 @@ import {
 } from '../actions/authActionTypes';
 
 const INITIAL_STATE = {
-    loading: false,
+    authToken: '',
+    loginErrorMessage: '',
     loginPassword: '',
     loginUserName: '',
     passwordResetEmail: '',
     passwordResetSuccess: false,
+};
+
+const authToken = (state = INITIAL_STATE.authToken, action) => {
+    switch (action.type) {
+        case LOGIN_SUCCESS:
+            return action.payload.token;
+
+        default:
+            return state;
+    }
+};
+
+const loginErrorMessage = (state = INITIAL_STATE.loginErrorMessage, action) => {
+    switch (action.type) {
+        case LOGIN_ERROR:
+            return action.payload;
+
+        case LOGIN_SUBMIT:
+        case LOGIN_SUCCESS:
+            return '';
+
+        default:
+            return state;
+    }
 };
 
 const loginPassword = (state = INITIAL_STATE.loginPassword, action) => {
@@ -69,6 +97,8 @@ const passwordResetSuccess = (state = INITIAL_STATE.passwordResetSuccess, action
 };
 
 const authReducer = combineReducers({
+    authToken,
+    loginErrorMessage,
     loginPassword,
     loginUserName,
     passwordResetEmail,

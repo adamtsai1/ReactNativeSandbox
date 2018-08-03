@@ -2,20 +2,6 @@ import React, { Component } from 'react';
 import { TextInput } from 'react-native';
 import PropTypes from 'prop-types';
 
-/* eslint-disable import/prefer-default-export */
-// export const Textbox = ({ value, secureTextEntry, onChangeText }) => {
-//     const { textboxStyles } = styles;
-
-//     return (
-//         <TextInput
-//             secureTextEntry={secureTextEntry}
-//             style={textboxStyles}
-//             value={value}
-//             onChangeText={onChangeText}
-//         />
-//     );
-// };
-
 export class Textbox extends Component {
     focus() {
         this.textInput.focus();
@@ -35,8 +21,6 @@ export class Textbox extends Component {
         );
     }
 }
-
-// = ({ value, secureTextEntry, onChangeText }) =>
 
 Textbox.propTypes = {
     secureTextEntry: PropTypes.bool,

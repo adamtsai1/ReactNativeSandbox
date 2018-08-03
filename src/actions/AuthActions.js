@@ -6,9 +6,11 @@ import {
 } from './appActionTypes';
 
 import {
+    LOGIN_ERROR,
     LOGIN_INIT,
     LOGIN_PASSWORD_CHANGE,
     LOGIN_SUBMIT,
+    LOGIN_SUCCESS,
     LOGIN_USER_NAME_CHANGE,
     PASSWORD_RESET_EMAIL_CHANGE,
     PASSWORD_RESET_INIT,
@@ -16,7 +18,7 @@ import {
     PASSWORD_RESET_SUCCESS,
 } from './authActionTypes';
 
-import { resetPassword } from '../api';
+import { login, resetPassword } from '../api';
 
 export const changePasswordResetEmail = (email) => ({
     type: PASSWORD_RESET_EMAIL_CHANGE,
@@ -44,6 +46,30 @@ export const initializePasswordReset = () => ({
 export const submitLogin = (userName, password) => (dispatch) => {
     dispatch({ type: LOGIN_SUBMIT });
     dispatch({ type: API_REQUEST });
+
+    return login(userName, password)
+        .then(apiResponse => {
+            dispatch({
+                type: LOGIN_SUCCESS,
+                payload: apiResponse.data,
+            });
+
+            dispatch({
+                type: API_SUCCESS,
+                payload: apiResponse.data,
+            });
+        })
+        .catch(apiResponse => {
+            dispatch({
+                type: LOGIN_ERROR,
+                payload: apiResponse.message,
+            });
+
+            dispatch({
+                type: API_ERROR,
+                payload: apiResponse.message,
+            });
+        });
 };
 
 export const submitPasswordReset = (email) => (dispatch) => {
@@ -53,18 +79,18 @@ export const submitPasswordReset = (email) => (dispatch) => {
         payload: email,
     });
 
-    resetPassword(email)
-        .then(response => {
+    return resetPassword(email)
+        .then(apiResponse => {
             dispatch({ type: PASSWORD_RESET_SUCCESS });
             dispatch({
                 type: API_SUCCESS,
-                payload: response.data,
+                payload: apiResponse.data,
             });
         })
-        .catch(response => {
+        .catch(apiResponse => {
             dispatch({
                 type: API_ERROR,
-                payload: response.error,
+                payload: apiResponse.error,
             });
         });
 };

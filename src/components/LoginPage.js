@@ -14,22 +14,44 @@ import {
 } from './common';
 
 // Actions
-import { changePasswordText, changeUserNameText, initializeLogin } from '../actions/authActions';
+import {
+    changePasswordText,
+    changeUserNameText,
+    initializeLogin,
+    submitLogin,
+} from '../actions/authActions';
 
 class LoginPage extends Component {
     constructor() {
         super();
         this.initializePage = this.initializePage.bind(this);
         this.onPasswordChanged = this.onPasswordChanged.bind(this);
+        this.onSubmitPressed = this.onSubmitPressed.bind(this);
         this.onUserNameChanged = this.onUserNameChanged.bind(this);
     }
 
     componentDidMount() {
+        if (this.props.authToken.length > 0) {
+            // Redirect to dashboard
+        }
+
         this.props.navigation.addListener('didFocus', this.initializePage);
+    }
+
+    componentDidUpdate() {
+        if (this.props.authToken.length > 0) {
+            // Redirect to dashboard
+
+            debugger
+        }
     }
 
     onPasswordChanged(text) {
         this.props.changePasswordText(text);
+    }
+
+    onSubmitPressed() {
+        this.props.submitLogin(this.props.userName, this.props.password);
     }
 
     onUserNameChanged(text) {
@@ -42,7 +64,13 @@ class LoginPage extends Component {
     }
 
     render() {
+        const { errorMessageContainerStyle, errorMessageTextStyle } = styles;
         const submitButtonDisabled = this.props.userName.length === 0 || this.props.password.length === 0;
+        const errorMessage = this.props.errorMessage.length > 0 ? (
+            <Container style={errorMessageContainerStyle}>
+                <Label style={errorMessageTextStyle}>{this.props.errorMessage}</Label>
+            </Container>
+        ) : null;
 
         return (
             <Page title="Login">
@@ -66,8 +94,10 @@ class LoginPage extends Component {
                     </Container>
                 </Form>
 
+                {errorMessage}
+
                 <Container style={{ marginBottom: 8 }}>
-                    <Button disabled={submitButtonDisabled} onPress={() => alert('Submit')}>
+                    <Button disabled={submitButtonDisabled} onPress={this.onSubmitPressed}>
                         Submit
                     </Button>
                 </Container>
@@ -83,17 +113,35 @@ class LoginPage extends Component {
 }
 
 LoginPage.propTypes = {
+    // Dependencies
     navigation: PropTypes.object,
+
+    // Properties
+    authToken: PropTypes.string,
+    errorMessage: PropTypes.string,
     password: PropTypes.string,
     userName: PropTypes.string,
+
+    // Actions
     changePasswordText: PropTypes.func,
     changeUserNameText: PropTypes.func,
-    initializeLogin: PropTypes.func,
+    submitLogin: PropTypes.func,
 };
 
-const styles = {};
+const styles = {
+    errorMessageContainerStyle: {
+        alignSelf: 'center',
+        marginBottom: 10,
+        marginTop: -20,
+    },
+    errorMessageTextStyle: {
+        color: 'red',
+    },
+};
 
 const mapStateToProps = (state) => ({
+    authToken: state.auth.authToken,
+    errorMessage: state.auth.loginErrorMessage,
     password: state.auth.loginPassword,
     userName: state.auth.loginUserName,
 });
@@ -102,4 +150,5 @@ export default connect(mapStateToProps, {
     changePasswordText,
     changeUserNameText,
     initializeLogin,
+    submitLogin,
 })(LoginPage);
