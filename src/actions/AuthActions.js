@@ -1,4 +1,5 @@
 /* eslint-disable arrow-parens */
+import { AsyncStorage } from 'react-native';
 import {
     API_ERROR,
     API_REQUEST,
@@ -6,6 +7,7 @@ import {
 } from './appActionTypes';
 
 import {
+    AUTH_TOKEN_RETRIEVED,
     LOGIN_ERROR,
     LOGIN_INIT,
     LOGIN_PASSWORD_CHANGE,
@@ -43,12 +45,19 @@ export const initializePasswordReset = () => ({
     type: PASSWORD_RESET_INIT,
 });
 
+export const setAuthToken = (authToken) => ({
+    type: AUTH_TOKEN_RETRIEVED,
+    payload: authToken,
+});
+
 export const submitLogin = (userName, password) => (dispatch) => {
     dispatch({ type: LOGIN_SUBMIT });
     dispatch({ type: API_REQUEST });
 
     return login(userName, password)
         .then(apiResponse => {
+            AsyncStorage.setItem('auth_token', apiResponse.data.token);
+
             dispatch({
                 type: LOGIN_SUCCESS,
                 payload: apiResponse.data,

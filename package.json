@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "ios": "react-native run-ios --simulator=\"iPhone X\"",
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest"
   },
@@ -13,6 +14,8 @@
     "react-native-loading-spinner-overlay": "^0.5.2",
     "react-navigation": "^2.5.3",
     "react-redux": "^5.0.7",
+    "reactotron-react-native": "^2.0.0",
+    "reactotron-redux": "^2.0.0",
     "redux": "^4.0.0",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0"

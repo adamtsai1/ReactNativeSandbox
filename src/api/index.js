@@ -4,12 +4,9 @@
 
 export const login = (userName, password) => {
     return simulateDelay(2000).then(() => {
-        if (userName === 'adam.tsai@fostermade.co' && password === 'test') {
-            return {
-                data: {
-                    token: 'ABC123',
-                },
-            };
+        if (userName.toUpperCase() === 'ADAM.TSAI@FOSTERMADE.CO' && password === 'test') {
+            const token = 'ABC123';
+            return { data: { token } };
         }
 
         throw new Error('Invalid credentials.');

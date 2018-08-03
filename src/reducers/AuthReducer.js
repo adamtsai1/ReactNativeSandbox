@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import {
+    AUTH_TOKEN_RETRIEVED,
     LOGIN_ERROR,
     LOGIN_INIT,
     LOGIN_PASSWORD_CHANGE,
@@ -22,6 +23,9 @@ const INITIAL_STATE = {
 
 const authToken = (state = INITIAL_STATE.authToken, action) => {
     switch (action.type) {
+        case AUTH_TOKEN_RETRIEVED:
+            return action.payload;
+
         case LOGIN_SUCCESS:
             return action.payload.token;
 

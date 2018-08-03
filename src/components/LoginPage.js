@@ -1,6 +1,7 @@
 // Dependencies
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 
 // Components
@@ -18,6 +19,7 @@ import {
     changePasswordText,
     changeUserNameText,
     initializeLogin,
+    setAuthToken,
     submitLogin,
 } from '../actions/authActions';
 
@@ -31,9 +33,12 @@ class LoginPage extends Component {
     }
 
     componentDidMount() {
-        if (this.props.authToken.length > 0) {
-            // Redirect to dashboard
-        }
+        AsyncStorage.getItem('auth_token')
+            .then(item => {
+                if (item) {
+                    this.props.setAuthToken(item);
+                }
+            });
 
         this.props.navigation.addListener('didFocus', this.initializePage);
     }
@@ -41,8 +46,6 @@ class LoginPage extends Component {
     componentDidUpdate() {
         if (this.props.authToken.length > 0) {
             // Redirect to dashboard
-
-            debugger
         }
     }
 
@@ -125,6 +128,7 @@ LoginPage.propTypes = {
     // Actions
     changePasswordText: PropTypes.func,
     changeUserNameText: PropTypes.func,
+    setAuthToken: PropTypes.func,
     submitLogin: PropTypes.func,
 };
 
@@ -150,5 +154,6 @@ export default connect(mapStateToProps, {
     changePasswordText,
     changeUserNameText,
     initializeLogin,
+    setAuthToken,
     submitLogin,
 })(LoginPage);

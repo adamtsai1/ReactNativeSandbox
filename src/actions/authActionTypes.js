@@ -1,3 +1,4 @@
+export const AUTH_TOKEN_RETRIEVED = 'auth_token_retrieved';
 export const LOGIN_ERROR = 'login_error';
 export const LOGIN_INIT = 'login_init';
 export const LOGIN_PASSWORD_CHANGE = 'login_password_change';

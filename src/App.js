@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import { applyMiddleware, createStore } from 'redux';
+import Reactotron from 'reactotron-react-native';
+import { applyMiddleware } from 'redux';
 import { createLogger } from 'redux-logger';
 import ReduxThunk from 'redux-thunk';
 
 // App
 import reducers from './reducers';
 import Router from './Router';
+import './ReactotronConfig';
 
 export default class App extends Component {
     render() {
         const loggerMiddleware = createLogger();
-        const store = createStore(
+        const store = Reactotron.createStore(
             reducers,
             {},
             applyMiddleware(
@@ -25,4 +27,4 @@ export default class App extends Component {
             </Provider>
         );
     }
-};
+}
