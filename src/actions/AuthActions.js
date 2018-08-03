@@ -6,6 +6,7 @@ import {
 } from './appActionTypes';
 
 import {
+    LOGIN_INIT,
     LOGIN_PASSWORD_CHANGE,
     LOGIN_SUBMIT,
     LOGIN_USER_NAME_CHANGE,
@@ -32,6 +33,10 @@ export const changeUserNameText = (userName) => ({
     payload: userName,
 });
 
+export const initializeLogin = () => ({
+    type: LOGIN_INIT,
+});
+
 export const initializePasswordReset = () => ({
     type: PASSWORD_RESET_INIT,
 });
@@ -39,8 +44,6 @@ export const initializePasswordReset = () => ({
 export const submitLogin = (userName, password) => (dispatch) => {
     dispatch({ type: LOGIN_SUBMIT });
     dispatch({ type: API_REQUEST });
-
-    
 };
 
 export const submitPasswordReset = (email) => (dispatch) => {

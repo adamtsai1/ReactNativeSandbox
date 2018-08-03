@@ -14,13 +14,18 @@ import {
 } from './common';
 
 // Actions
-import { changePasswordText, changeUserNameText } from '../actions/authActions';
+import { changePasswordText, changeUserNameText, initializeLogin } from '../actions/authActions';
 
 class LoginPage extends Component {
     constructor() {
         super();
+        this.initializePage = this.initializePage.bind(this);
         this.onPasswordChanged = this.onPasswordChanged.bind(this);
         this.onUserNameChanged = this.onUserNameChanged.bind(this);
+    }
+
+    componentDidMount() {
+        this.props.navigation.addListener('didFocus', this.initializePage);
     }
 
     onPasswordChanged(text) {
@@ -31,6 +36,11 @@ class LoginPage extends Component {
         this.props.changeUserNameText(text);
     }
 
+    initializePage() {
+        this.userNameInput.focus();
+        // this.props.initializeLogin();
+    }
+
     render() {
         const submitButtonDisabled = this.props.userName.length === 0 || this.props.password.length === 0;
 
@@ -39,12 +49,20 @@ class LoginPage extends Component {
                 <Form>
                     <Label>User Name</Label>
                     <Container style={{ marginBottom: 16 }}>
-                        <Textbox onChangeText={this.onUserNameChanged} />
+                        <Textbox
+                            ref={(input) => { this.userNameInput = input; }}
+                            value={this.props.userName}
+                            onChangeText={this.onUserNameChanged}
+                        />
                     </Container>
 
                     <Label>Password</Label>
                     <Container>
-                        <Textbox secureTextEntry onChangeText={this.onPasswordChanged} />
+                        <Textbox
+                            secureTextEntry
+                            value={this.props.password}
+                            onChangeText={this.onPasswordChanged}
+                        />
                     </Container>
                 </Form>
 
@@ -70,15 +88,18 @@ LoginPage.propTypes = {
     userName: PropTypes.string,
     changePasswordText: PropTypes.func,
     changeUserNameText: PropTypes.func,
+    initializeLogin: PropTypes.func,
 };
 
 const styles = {};
 
-const mapStateToProps = (state) => {
-    return {
-        password: state.auth.loginPassword,
-        userName: state.auth.loginUserName,
-    };
-};
+const mapStateToProps = (state) => ({
+    password: state.auth.loginPassword,
+    userName: state.auth.loginUserName,
+});
 
-export default connect(mapStateToProps, { changePasswordText, changeUserNameText })(LoginPage);
+export default connect(mapStateToProps, {
+    changePasswordText,
+    changeUserNameText,
+    initializeLogin,
+})(LoginPage);

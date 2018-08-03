@@ -15,7 +15,11 @@ import {
 } from './common';
 
 // Actions
-import { changePasswordResetEmail, initializePasswordReset, submitPasswordReset } from '../actions/authActions';
+import {
+    changePasswordResetEmail,
+    initializeLogin,
+    initializePasswordReset,
+    submitPasswordReset } from '../actions/authActions';
 
 // Utility
 import { validateEmail } from '../utility';
@@ -24,6 +28,7 @@ class PasswordResetPage extends Component {
     constructor() {
         super();
         this.onEmailChanged = this.onEmailChanged.bind(this);
+        this.onGoToLoginButtonPressed = this.onGoToLoginButtonPressed.bind(this);
         this.onSubmitButtonPressed = this.onSubmitButtonPressed.bind(this);
     }
 
@@ -33,6 +38,11 @@ class PasswordResetPage extends Component {
 
     onEmailChanged(text) {
         this.props.changePasswordResetEmail(text);
+    }
+
+    onGoToLoginButtonPressed() {
+        this.props.initializeLogin();
+        this.props.navigation.navigate('Login');
     }
 
     onSubmitButtonPressed() {
@@ -71,7 +81,7 @@ class PasswordResetPage extends Component {
                 </Form>
 
                 <Container>
-                    <Button onPress={() => this.props.navigation.navigate('Login')}>Login</Button>
+                    <Button onPress={this.onGoToLoginButtonPressed}>Login</Button>
                 </Container>
             </View>
         );
@@ -94,6 +104,7 @@ PasswordResetPage.propTypes = {
 
     // Actions
     changePasswordResetEmail: PropTypes.func,
+    initializeLogin: PropTypes.func,
     initializePasswordReset: PropTypes.func,
     submitPasswordReset: PropTypes.func,
 };
@@ -105,6 +116,7 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
     changePasswordResetEmail,
+    initializeLogin,
     initializePasswordReset,
     submitPasswordReset,
 })(PasswordResetPage);

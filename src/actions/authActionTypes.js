@@ -1,3 +1,4 @@
+export const LOGIN_INIT = 'login_init';
 export const LOGIN_PASSWORD_CHANGE = 'login_password_change';
 export const LOGIN_SUBMIT = 'login_submit';
 export const LOGIN_USER_NAME_CHANGE = 'login_user_name_change';

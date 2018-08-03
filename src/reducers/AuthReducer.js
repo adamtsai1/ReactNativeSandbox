@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import {
+    LOGIN_INIT,
     LOGIN_PASSWORD_CHANGE,
     LOGIN_USER_NAME_CHANGE,
     PASSWORD_RESET_EMAIL_CHANGE,
@@ -17,6 +18,9 @@ const INITIAL_STATE = {
 
 const loginPassword = (state = INITIAL_STATE.loginPassword, action) => {
     switch (action.type) {
+        case LOGIN_INIT:
+            return '';
+
         case LOGIN_PASSWORD_CHANGE:
             return action.payload;
 
@@ -27,6 +31,9 @@ const loginPassword = (state = INITIAL_STATE.loginPassword, action) => {
 
 const loginUserName = (state = INITIAL_STATE.loginUserName, action) => {
     switch (action.type) {
+        case LOGIN_INIT:
+            return '';
+
         case LOGIN_USER_NAME_CHANGE:
             return action.payload;
 
