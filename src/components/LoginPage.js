@@ -2,7 +2,9 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { AsyncStorage } from 'react-native';
+import { StackActions, NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
+import Reactotron from 'reactotron-react-native';
 
 // Components
 import {
@@ -36,6 +38,16 @@ class LoginPage extends Component {
         AsyncStorage.getItem('auth_token')
             .then(item => {
                 if (item) {
+                    Reactotron.log(`Auth token: ${item}`);
+
+                    Reactotron.display({
+                        name: 'Oh hi',
+                        important: true,
+                        preview: 'this is a test',
+                        value: { a: 1, b: 2, c: 3 },
+                        image: 'http://placekitten.com/g/400/400',
+                    });
+
                     this.props.setAuthToken(item);
                 }
             });
@@ -45,7 +57,13 @@ class LoginPage extends Component {
 
     componentDidUpdate() {
         if (this.props.authToken.length > 0) {
-            // Redirect to dashboard
+            // this.props.navigation.navigate('Dashboard');
+
+            const resetAction = StackActions.reset({
+                index: 0,
+                actions: [NavigationActions.navigate({ routeName: 'Dashboard' })],
+            });
+            this.props.navigation.dispatch(resetAction);
         }
     }
 
