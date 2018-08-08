@@ -1,10 +1,7 @@
 // Dependencies
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { AsyncStorage } from 'react-native';
-import { StackActions, NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
-import Reactotron from 'reactotron-react-native';
 
 // Components
 import {
@@ -21,7 +18,6 @@ import {
     changePasswordText,
     changeUserNameText,
     initializeLogin,
-    setAuthToken,
     submitLogin,
 } from '../actions/authActions';
 
@@ -38,17 +34,15 @@ class LoginPage extends Component {
         this.props.navigation.addListener('didFocus', this.initializePage);
     }
 
-    componentDidUpdate() {
-        if (this.props.authToken.length > 0) {
-            // this.props.navigation.navigate('Dashboard');
-
-            const resetAction = StackActions.reset({
-                index: 0,
-                actions: [NavigationActions.navigate({ routeName: 'Dashboard' })],
-            });
-            this.props.navigation.dispatch(resetAction);
-        }
-    }
+    // componentDidUpdate() {
+    //     if (this.props.authToken.length > 0) {
+    //         const resetAction = StackActions.reset({
+    //             index: 0,
+    //             actions: [NavigationActions.navigate({ routeName: 'Dashboard' })],
+    //         });
+    //         this.props.navigation.dispatch(resetAction);
+    //     }
+    // }
 
     onPasswordChanged(text) {
         this.props.changePasswordText(text);
@@ -77,7 +71,7 @@ class LoginPage extends Component {
         ) : null;
 
         return (
-            <Page title="Login">
+            <Page title="Login" hideMenuBar>
                 <Form>
                     <Label>User Name</Label>
                     <Container style={{ marginBottom: 16 }}>
@@ -121,7 +115,6 @@ LoginPage.propTypes = {
     navigation: PropTypes.object,
 
     // Properties
-    authToken: PropTypes.string,
     errorMessage: PropTypes.string,
     password: PropTypes.string,
     userName: PropTypes.string,
@@ -129,7 +122,6 @@ LoginPage.propTypes = {
     // Actions
     changePasswordText: PropTypes.func,
     changeUserNameText: PropTypes.func,
-    setAuthToken: PropTypes.func,
     submitLogin: PropTypes.func,
 };
 
@@ -155,6 +147,5 @@ export default connect(mapStateToProps, {
     changePasswordText,
     changeUserNameText,
     initializeLogin,
-    setAuthToken,
     submitLogin,
 })(LoginPage);

@@ -13,7 +13,7 @@ import { setAuthToken } from '../actions/authActions';
 class SplashPage extends Component {
     constructor() {
         super();
-        this.holdTime = 3;
+        this.holdTime = 1;
     }
 
     componentDidMount() {

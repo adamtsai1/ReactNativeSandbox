@@ -4,6 +4,9 @@ import { Text, View } from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { connect } from 'react-redux';
 
+// Components
+import { MenuBar } from './MenuBar';
+
 class PageComponent extends Component {
     render() {
         const {
@@ -12,9 +15,12 @@ class PageComponent extends Component {
             outerPageStyle,
         } = styles;
 
+        const menuBar = this.props.hideMenuBar ? null : <MenuBar activeTab={'dashboard'} />;
+
         return (
             <View style={outerPageStyle}>
                 <Spinner visible={this.props.loading} />
+                {menuBar}
                 <Text style={headerStyle}>{this.props.title}</Text>
                 <View style={innerPageStyle}>
                     {this.props.children}
@@ -26,6 +32,7 @@ class PageComponent extends Component {
 
 PageComponent.propTypes = {
     children: PropTypes.any,
+    hideMenuBar: PropTypes.bool,
     loading: PropTypes.bool,
     title: PropTypes.string,
 };

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 
 // Components
-import { MenuBar } from './common';
+import { MenuBar, Page } from './common';
 
 export default class DashboardPage extends Component {
     componentWillMount() {
@@ -10,10 +10,9 @@ export default class DashboardPage extends Component {
 
     render() {
         return (
-            <View>
-                <MenuBar />
+            <Page title="Dashboard">
                 <Text>Dashboard Page</Text>
-            </View>
+            </Page>
         );
     }
 }
