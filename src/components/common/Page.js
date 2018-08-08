@@ -16,7 +16,9 @@ class PageComponent extends Component {
             outerPageStyle,
         } = styles;
 
-        const menuBar = this.props.hideMenuBar ? null : <MenuBar activeTab={'dashboard'} />;
+        const menuBar = this.props.hideMenuBar ? null : (
+            <MenuBar activeTab={'dashboard'} navigate={this.props.navigate} />
+        );
 
         return (
             <View style={outerPageStyle}>
@@ -39,6 +41,7 @@ PageComponent.propTypes = {
     hideMenuBar: PropTypes.bool,
     loading: PropTypes.bool,
     title: PropTypes.string,
+    navigate: PropTypes.func,
 };
 
 const styles = {

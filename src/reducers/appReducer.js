@@ -8,7 +8,7 @@ import {
 } from '../actions/appActionTypes';
 
 const INITIAL_STATE = {
-    activeTab: 'dashboard',
+    activeTab: 'Dashboard',
     loading: false,
     splashCounter: 0,
 };

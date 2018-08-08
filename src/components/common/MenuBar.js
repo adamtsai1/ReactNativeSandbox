@@ -1,7 +1,7 @@
 // Dependencies
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { connect } from 'react-redux';
 
 // Components
@@ -11,10 +11,9 @@ import { MenuIcon } from './MenuIcon';
 import { changeActiveTab } from '../../actions/appActions';
 
 class MenuBarComponent extends Component {
-    setActiveTab(tabName) {
-        debugger
-
+    changeActiveTab(tabName) {
         this.props.changeActiveTab(tabName);
+        this.props.navigate(tabName);
     }
 
     render() {
@@ -24,24 +23,24 @@ class MenuBarComponent extends Component {
         return (
             <View style={containerStyle}>
                 <MenuIcon
-                    active={getIsIconActive('dashboard')}
+                    active={getIsIconActive('Dashboard')}
                     iconLabel="Dashboard"
                     iconName="tachometer"
-                    onPress={() => this.setActiveTab('dashboard')}
+                    onPress={() => this.changeActiveTab('Dashboard')}
                 />
 
                 <MenuIcon
-                    active={getIsIconActive('request')}
+                    active={getIsIconActive('Request')}
                     iconLabel="Request Time Off"
                     iconName="calendar"
-                    onPress={() => this.setActiveTab('request')}
+                    onPress={() => this.changeActiveTab('Request')}
                 />
 
                 <MenuIcon
-                    active={getIsIconActive('history')}
+                    active={getIsIconActive('RequestHistory')}
                     iconLabel="History"
                     iconName="history"
-                    onPress={() => this.props.changeActiveTab('history')}
+                    onPress={() => this.changeActiveTab('RequestHistory')}
                 />
 
                 <MenuIcon
@@ -56,6 +55,7 @@ class MenuBarComponent extends Component {
 MenuBarComponent.propTypes = {
     activeTab: PropTypes.string,
     changeActiveTab: PropTypes.func,
+    navigate: PropTypes.func,
 };
 
 const styles = {

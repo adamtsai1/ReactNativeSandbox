@@ -6,6 +6,8 @@ import { createStackNavigator } from 'react-navigation';
 import DashboardPage from './components/DashboardPage';
 import LoginPage from './components/LoginPage';
 import PasswordResetPage from './components/PasswordResetPage';
+import RequestHistoryPage from './components/RequestHistoryPage';
+import RequestPage from './components/RequestPage';
 import SplashPage from './components/SplashPage';
 import { Header } from './components/common';
 
@@ -13,6 +15,8 @@ const RouterComponent = createStackNavigator({
     Dashboard: DashboardPage,
     Login: LoginPage,
     PasswordReset: PasswordResetPage,
+    Request: RequestPage,
+    RequestHistory: RequestHistoryPage,
     Splash: SplashPage,
 }, {
     initialRouteName: 'Splash',
