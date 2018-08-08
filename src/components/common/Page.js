@@ -10,6 +10,7 @@ import { MenuBar } from './MenuBar';
 class PageComponent extends Component {
     render() {
         const {
+            contentContainerStyle,
             headerStyle,
             innerPageStyle,
             outerPageStyle,
@@ -19,12 +20,15 @@ class PageComponent extends Component {
 
         return (
             <View style={outerPageStyle}>
-                <Spinner visible={this.props.loading} />
-                {menuBar}
-                <Text style={headerStyle}>{this.props.title}</Text>
-                <View style={innerPageStyle}>
-                    {this.props.children}
+                <View style={contentContainerStyle}>
+                    <Spinner visible={this.props.loading} />
+                    <Text style={headerStyle}>{this.props.title}</Text>
+                    <View style={innerPageStyle}>
+                        {this.props.children}
+                    </View>
                 </View>
+
+                {menuBar}
             </View>
         );
     }
@@ -38,6 +42,9 @@ PageComponent.propTypes = {
 };
 
 const styles = {
+    contentContainerStyle: {
+        flex: 1,
+    },
     headerStyle: {
         backgroundColor: '#d1de3a',
         color: '#fff',

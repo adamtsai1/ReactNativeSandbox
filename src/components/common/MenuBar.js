@@ -1,30 +1,61 @@
 // Dependencies
 import PropTypes from 'prop-types';
-import React from 'react';
-import { View } from 'react-native';
+import React, { Component } from 'react';
+import { Text, View } from 'react-native';
+import { connect } from 'react-redux';
 
 // Components
 import { MenuIcon } from './MenuIcon';
 
-export const MenuBar = ({ activeTab }) => {
-    const { containerStyle } = styles;
+// App
+import { changeActiveTab } from '../../actions/appActions';
 
-    const getIsIconActive = (tabName) => {
-        return activeTab === tabName;
-    };
+class MenuBarComponent extends Component {
+    setActiveTab(tabName) {
+        debugger
 
-    return (
-        <View style={containerStyle}>
-            <MenuIcon active={getIsIconActive('dashboard')} iconLabel="Dashboard" iconName="tachometer" />
-            <MenuIcon iconLabel="Request Time Off" iconName="calendar" />
-            <MenuIcon iconLabel="History" iconName="history" />
-            <MenuIcon iconLabel="Settings" iconName="bars" />
-        </View>
-    );
-};
+        this.props.changeActiveTab(tabName);
+    }
 
-MenuBar.propTypes = {
+    render() {
+        const { containerStyle } = styles;
+        const getIsIconActive = (tabName) => this.props.activeTab === tabName;
+
+        return (
+            <View style={containerStyle}>
+                <MenuIcon
+                    active={getIsIconActive('dashboard')}
+                    iconLabel="Dashboard"
+                    iconName="tachometer"
+                    onPress={() => this.setActiveTab('dashboard')}
+                />
+
+                <MenuIcon
+                    active={getIsIconActive('request')}
+                    iconLabel="Request Time Off"
+                    iconName="calendar"
+                    onPress={() => this.setActiveTab('request')}
+                />
+
+                <MenuIcon
+                    active={getIsIconActive('history')}
+                    iconLabel="History"
+                    iconName="history"
+                    onPress={() => this.props.changeActiveTab('history')}
+                />
+
+                <MenuIcon
+                    iconLabel="Settings"
+                    iconName="bars"
+                />
+            </View>
+        );
+    }
+}
+
+MenuBarComponent.propTypes = {
     activeTab: PropTypes.string,
+    changeActiveTab: PropTypes.func,
 };
 
 const styles = {
@@ -35,3 +66,9 @@ const styles = {
         padding: 10,
     },
 };
+
+const mapStateToProps = (state) => ({
+    activeTab: state.app.activeTab,
+});
+
+export const MenuBar = connect(mapStateToProps, { changeActiveTab })(MenuBarComponent);

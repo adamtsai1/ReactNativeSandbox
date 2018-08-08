@@ -34,16 +34,6 @@ class LoginPage extends Component {
         this.props.navigation.addListener('didFocus', this.initializePage);
     }
 
-    // componentDidUpdate() {
-    //     if (this.props.authToken.length > 0) {
-    //         const resetAction = StackActions.reset({
-    //             index: 0,
-    //             actions: [NavigationActions.navigate({ routeName: 'Dashboard' })],
-    //         });
-    //         this.props.navigation.dispatch(resetAction);
-    //     }
-    // }
-
     onPasswordChanged(text) {
         this.props.changePasswordText(text);
     }

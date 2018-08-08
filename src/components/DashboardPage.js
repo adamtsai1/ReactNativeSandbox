@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text } from 'react-native';
 
 // Components
-import { MenuBar, Page } from './common';
+import { Page } from './common';
 
 export default class DashboardPage extends Component {
     componentWillMount() {

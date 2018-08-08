@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import {
+    ACTIVE_TAB_CHANGE,
     API_ERROR,
     API_REQUEST,
     API_SUCCESS,
@@ -7,8 +8,19 @@ import {
 } from '../actions/appActionTypes';
 
 const INITIAL_STATE = {
+    activeTab: 'dashboard',
     loading: false,
     splashCounter: 0,
+};
+
+const activeTab = (state = INITIAL_STATE.activeTab, action) => {
+    switch (action.type) {
+        case ACTIVE_TAB_CHANGE:
+            return action.payload;
+
+        default:
+            return state;
+    }
 };
 
 const loading = (state = INITIAL_STATE.loading, action) => {
@@ -38,6 +50,7 @@ const splashCounter = (state = INITIAL_STATE.splashCounter, action) => {
 };
 
 export default combineReducers({
+    activeTab,
     loading,
     splashCounter,
 });
