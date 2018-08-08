@@ -35,23 +35,6 @@ class LoginPage extends Component {
     }
 
     componentDidMount() {
-        AsyncStorage.getItem('auth_token')
-            .then(item => {
-                if (item) {
-                    Reactotron.log(`Auth token: ${item}`);
-
-                    Reactotron.display({
-                        name: 'Oh hi',
-                        important: true,
-                        preview: 'this is a test',
-                        value: { a: 1, b: 2, c: 3 },
-                        image: 'http://placekitten.com/g/400/400',
-                    });
-
-                    this.props.setAuthToken(item);
-                }
-            });
-
         this.props.navigation.addListener('didFocus', this.initializePage);
     }
 
