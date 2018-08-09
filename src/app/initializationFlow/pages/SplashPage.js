@@ -16,14 +16,6 @@ class SplashPageComponent extends Component {
     }
 
     componentDidMount() {
-        if (this.props.splashCounter < this.holdTime) {
-            setTimeout(() => {
-                this.props.incrementSplashCounter();
-            }, 1000);
-
-            return;
-        }
-
         AsyncStorage.getItem('auth_token')
             .then(item => {
                 if (item) {
@@ -37,6 +29,8 @@ class SplashPageComponent extends Component {
                     });
 
                     this.props.setAuthToken(item);
+                } else {
+                    this.forceUpdate(); // To trigger componentDidUpdate
                 }
             });
     }

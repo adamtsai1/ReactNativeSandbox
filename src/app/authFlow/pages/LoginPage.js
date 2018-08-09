@@ -34,6 +34,12 @@ class LoginPageComponent extends Component {
         this.props.navigation.addListener('didFocus', this.initializePage);
     }
 
+    componentDidUpdate() {
+        if (this.props.authToken.length > 0) {
+            this.props.screenProps.rootNavigator.navigate('Main');
+        }
+    }
+
     onPasswordChanged(text) {
         this.props.changePasswordText(text);
     }
@@ -103,8 +109,10 @@ class LoginPageComponent extends Component {
 LoginPageComponent.propTypes = {
     // Dependencies
     navigation: PropTypes.object,
+    screenProps: PropTypes.object,
 
     // Properties
+    authToken: PropTypes.string,
     errorMessage: PropTypes.string,
     password: PropTypes.string,
     userName: PropTypes.string,
