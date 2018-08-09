@@ -7,6 +7,7 @@ import AppNavigationService from './AppNavigationService';
 import InitializationNavigator from './app/initializationFlow/InitializationNavigator';
 import AuthNavigator from './app/authFlow/AuthNavigator';
 import MainNavigator from './app/mainFlow/MainNavigator';
+import { Header } from './components';
 
 const navigatorRoutes = {
     Initialization: InitializationNavigator,

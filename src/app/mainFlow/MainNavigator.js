@@ -1,8 +1,6 @@
 // Dependencies
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import { Text, View } from 'react-native';
-import { createStackNavigator } from 'react-navigation';
+import React from 'react';
+import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
 
 // Components
 import { Header, MenuBar } from '../../components';
@@ -13,46 +11,27 @@ import {
     SettingsPage,
 } from './pages';
 
-const navigatorRoutes = {
+const tabNavigatorRoutes = {
     Dashboard: DashboardPage,
     Request: RequestPage,
     RequestHistory: RequestHistoryPage,
     Settings: SettingsPage,
 };
-
-const navigatorConfig = {
+const tabNavigatorConfig = {
     initialRouteName: 'Dashboard',
+    tabBarComponent: MenuBar,
+};
+const tabNavigator = createBottomTabNavigator(tabNavigatorRoutes, tabNavigatorConfig);
+
+const stackNavigatorRoutes = {
+    main: tabNavigator,
+};
+
+const stackNavigatorConfig = {
+    initialRouteName: 'main',
     navigationOptions: {
         headerTitle: <Header />,
     },
 };
 
-const MainNavigatorComponent = createStackNavigator(navigatorRoutes, navigatorConfig);
-const MainNavigator = ({ navigation }) => {
-    const { contentContainerStyle, outerContainerStyle } = styles;
-
-    return (
-        <View style={outerContainerStyle}>
-            <View style={contentContainerStyle}>
-                <MainNavigatorComponent screenProps={{ rootNavigator: navigation }} />
-            </View>
-
-            <MenuBar activeTab={'dashboard'} navigate={navigation.navigate} />
-        </View>
-    );
-};
-
-MainNavigator.propTypes = {
-    navigation: PropTypes.object,
-};
-
-const styles = {
-    contentContainerStyle: {
-        flex: 1,
-    },
-    outerContainerStyle: {
-        flex: 1,
-    },
-};
-
-export default MainNavigator;
+export default createStackNavigator(stackNavigatorRoutes, stackNavigatorConfig);

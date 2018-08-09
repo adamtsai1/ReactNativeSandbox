@@ -11,7 +11,7 @@ export class DashboardPage extends Component {
 
     render() {
         return (
-            <Page title="Dashboard" navigate={this.props.navigation.navigate}>
+            <Page title="Dashboard">
                 <Text>Dashboard Page</Text>
             </Page>
         );

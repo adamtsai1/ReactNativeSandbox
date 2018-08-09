@@ -4,9 +4,6 @@ import { Text, View } from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { connect } from 'react-redux';
 
-// Components
-import { MenuBar } from './MenuBar';
-
 class PageComponent extends Component {
     render() {
         const {
@@ -34,7 +31,6 @@ PageComponent.propTypes = {
     children: PropTypes.any,
     loading: PropTypes.bool,
     title: PropTypes.string,
-    navigate: PropTypes.func,
 };
 
 const styles = {
