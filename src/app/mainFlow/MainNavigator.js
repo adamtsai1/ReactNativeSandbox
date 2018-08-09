@@ -1,9 +1,10 @@
 // Dependencies
 import React from 'react';
 import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 // Components
-import { Header, MenuBar, MenuIcon } from '../../components';
+import { Header } from '../../components';
 import {
     DashboardPage,
     RequestHistoryPage,
@@ -12,33 +13,37 @@ import {
 } from './pages';
 
 const tabNavigatorRoutes = {
-    Dashboard: {
+    dashboard: {
         screen: DashboardPage,
         navigationOptions: {
-            tabBarIcon: (props) => <MenuIcon {...props} iconName="tachometer" />,
+            tabBarIcon: (props) => <Icon name="tachometer" size={28} color={props.tintColor} />,
+            tabBarLabel: 'Dashboard',
         },
     },
-    'Request Time Off': {
+    request: {
         screen: RequestPage,
         navigationOptions: {
-            tabBarIcon: (props) => <MenuIcon {...props} iconName="calendar" />,
+            tabBarIcon: (props) => <Icon name="calendar" size={28} color={props.tintColor} />,
+            tabBarLabel: 'Request Time Off',
         },
     },
-    History: {
+    history: {
         screen: RequestHistoryPage,
         navigationOptions: {
-            tabBarIcon: (props) => <MenuIcon {...props} iconName="history" />,
+            tabBarIcon: (props) => <Icon name="history" size={28} color={props.tintColor} />,
+            tabBarLabel: 'History',
         },
     },
-    Settings: {
+    settings: {
         screen: SettingsPage,
         navigationOptions: {
-            tabBarIcon: (props) => <MenuIcon {...props} iconName="bars" />,
+            tabBarIcon: (props) => <Icon name="bars" size={28} color={props.tintColor} />,
+            tabBarLabel: 'Settings',
         },
     },
 };
 const tabNavigatorConfig = {
-    initialRouteName: 'Dashboard',
+    initialRouteName: 'dashboard',
     tabBarOptions: {
         activeTintColor: '#fff',
         iconStyle: {},
@@ -49,12 +54,11 @@ const tabNavigatorConfig = {
         showIcon: true,
         style: {
             backgroundColor: '#555',
-            height: 54,
+            height: 60,
+            paddingBottom: 6,
             paddingTop: 8,
         },
     },
-
-    // tabBarComponent: props => <MenuBar {...props} />,
 };
 const tabNavigator = createBottomTabNavigator(tabNavigatorRoutes, tabNavigatorConfig);
 
