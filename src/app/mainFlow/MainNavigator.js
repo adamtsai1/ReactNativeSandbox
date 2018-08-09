@@ -3,7 +3,7 @@ import React from 'react';
 import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
 
 // Components
-import { Header, MenuBar } from '../../components';
+import { Header, MenuBar, MenuIcon } from '../../components';
 import {
     DashboardPage,
     RequestHistoryPage,
@@ -12,14 +12,49 @@ import {
 } from './pages';
 
 const tabNavigatorRoutes = {
-    Dashboard: DashboardPage,
-    Request: RequestPage,
-    RequestHistory: RequestHistoryPage,
-    Settings: SettingsPage,
+    Dashboard: {
+        screen: DashboardPage,
+        navigationOptions: {
+            tabBarIcon: (props) => <MenuIcon {...props} iconName="tachometer" />,
+        },
+    },
+    'Request Time Off': {
+        screen: RequestPage,
+        navigationOptions: {
+            tabBarIcon: (props) => <MenuIcon {...props} iconName="calendar" />,
+        },
+    },
+    History: {
+        screen: RequestHistoryPage,
+        navigationOptions: {
+            tabBarIcon: (props) => <MenuIcon {...props} iconName="history" />,
+        },
+    },
+    Settings: {
+        screen: SettingsPage,
+        navigationOptions: {
+            tabBarIcon: (props) => <MenuIcon {...props} iconName="bars" />,
+        },
+    },
 };
 const tabNavigatorConfig = {
     initialRouteName: 'Dashboard',
-    tabBarComponent: MenuBar,
+    tabBarOptions: {
+        activeTintColor: '#fff',
+        iconStyle: {},
+        inactiveTintColor: '#d1de3a',
+        labelStyle: {
+            marginTop: 4,
+        },
+        showIcon: true,
+        style: {
+            backgroundColor: '#555',
+            height: 54,
+            paddingTop: 8,
+        },
+    },
+
+    // tabBarComponent: props => <MenuBar {...props} />,
 };
 const tabNavigator = createBottomTabNavigator(tabNavigatorRoutes, tabNavigatorConfig);
 
