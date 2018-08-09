@@ -8,11 +8,12 @@ import Reactotron from 'reactotron-react-native';
 // App
 import { incrementSplashCounter } from '../../../actions/appActions';
 import { setAuthToken } from '../../../actions/authActions';
+import AppNavigationService from '../../../AppNavigationService';
 
 class SplashPageComponent extends Component {
     constructor() {
         super();
-        this.holdTime = 3;
+        this.holdTime = 2;
     }
 
     componentDidMount() {
@@ -45,7 +46,7 @@ class SplashPageComponent extends Component {
         }
 
         const flowName = this.props.authToken.length > 0 ? 'Main' : 'Auth';
-        this.props.screenProps.rootNavigator.navigate(flowName);
+        AppNavigationService.navigate(flowName);
     }
 
     render() {

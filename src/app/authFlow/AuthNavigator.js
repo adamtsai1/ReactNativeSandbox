@@ -19,7 +19,4 @@ const navigatorConfig = {
     },
 };
 
-const AuthNavigatorComponent = createStackNavigator(navigatorRoutes, navigatorConfig);
-const AuthNavigator = ({ navigation }) => <AuthNavigatorComponent screenProps={{ rootNavigator: navigation }} />;
-AuthNavigator.propTypes = { navigation: PropTypes.object };
-export default AuthNavigator;
+export default createStackNavigator(navigatorRoutes, navigatorConfig);

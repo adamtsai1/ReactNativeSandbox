@@ -1,5 +1,4 @@
 // Dependencies
-import PropTypes from 'prop-types';
 import React from 'react';
 import { createStackNavigator } from 'react-navigation';
 
@@ -15,8 +14,4 @@ const navigatorConfig = {
     },
 };
 
-const InitializationNavigatorComponent = createStackNavigator(navigatorRoutes, navigatorConfig);
-
-const InitializationNavigator = ({ navigation }) => <InitializationNavigatorComponent screenProps={{ rootNavigator: navigation }} />;
-InitializationNavigator.propTypes = { navigation: PropTypes.object };
-export default InitializationNavigator;
+export default createStackNavigator(navigatorRoutes, navigatorConfig);

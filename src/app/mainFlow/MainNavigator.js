@@ -1,10 +1,11 @@
 // Dependencies
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { Component } from 'react';
+import { Text, View } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 
 // Components
-import { Header } from '../../components';
+import { Header, MenuBar } from '../../components';
 import {
     DashboardPage,
     RequestHistoryPage,
@@ -27,6 +28,31 @@ const navigatorConfig = {
 };
 
 const MainNavigatorComponent = createStackNavigator(navigatorRoutes, navigatorConfig);
-const MainNavigator = ({ navigation }) => <MainNavigatorComponent screenProps={{ rootNavigator: navigation }} />;
-MainNavigator.propTypes = { navigation: PropTypes.object };
+const MainNavigator = ({ navigation }) => {
+    const { contentContainerStyle, outerContainerStyle } = styles;
+
+    return (
+        <View style={outerContainerStyle}>
+            <View style={contentContainerStyle}>
+                <MainNavigatorComponent screenProps={{ rootNavigator: navigation }} />
+            </View>
+
+            <MenuBar activeTab={'dashboard'} navigate={navigation.navigate} />
+        </View>
+    );
+};
+
+MainNavigator.propTypes = {
+    navigation: PropTypes.object,
+};
+
+const styles = {
+    contentContainerStyle: {
+        flex: 1,
+    },
+    outerContainerStyle: {
+        flex: 1,
+    },
+};
+
 export default MainNavigator;

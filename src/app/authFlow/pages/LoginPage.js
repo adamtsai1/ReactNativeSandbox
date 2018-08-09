@@ -21,6 +21,9 @@ import {
     submitLogin,
 } from '../../../actions/authActions';
 
+// App
+import AppNavigationService from '../../../AppNavigationService';
+
 class LoginPageComponent extends Component {
     constructor() {
         super();
@@ -36,7 +39,7 @@ class LoginPageComponent extends Component {
 
     componentDidUpdate() {
         if (this.props.authToken.length > 0) {
-            this.props.screenProps.rootNavigator.navigate('Main');
+            AppNavigationService.navigate('Main');
         }
     }
 
@@ -67,7 +70,7 @@ class LoginPageComponent extends Component {
         ) : null;
 
         return (
-            <Page title="Login" hideMenuBar>
+            <Page title="Login">
                 <Form>
                     <Label>User Name</Label>
                     <Container style={{ marginBottom: 16 }}>

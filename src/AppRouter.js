@@ -2,7 +2,8 @@
 import React, { Component } from 'react';
 import { createSwitchNavigator } from 'react-navigation';
 
-// Components
+// App
+import AppNavigationService from './AppNavigationService';
 import InitializationNavigator from './app/initializationFlow/InitializationNavigator';
 import AuthNavigator from './app/authFlow/AuthNavigator';
 import MainNavigator from './app/mainFlow/MainNavigator';
@@ -17,9 +18,15 @@ const navigatorConfig = {
     initialRouteName: 'Initialization',
 };
 
-const MainRouterComponent = createSwitchNavigator(navigatorRoutes, navigatorConfig);
-export default class MainRouter extends Component {
+const AppRouterComponent = createSwitchNavigator(navigatorRoutes, navigatorConfig);
+export default class AppRouter extends Component {
     render() {
-        return <MainRouterComponent />;
+        return (
+            <AppRouterComponent
+                ref={navigatorRef => {
+                    AppNavigationService.setTopLevelNavigator(navigatorRef);
+                }}
+            />
+        );
     }
 }
