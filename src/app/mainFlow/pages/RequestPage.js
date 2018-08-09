@@ -4,9 +4,9 @@ import { Text } from 'react-native';
 import { connect } from 'react-redux';
 
 // Components
-import { Page } from '../components/common';
+import { Page } from '../../../components';
 
-class RequestPage extends Component {
+class RequestPageComponent extends Component {
     render() {
         return (
             <Page title="Request Time Off" navigate={this.props.navigation.navigate}>
@@ -16,8 +16,8 @@ class RequestPage extends Component {
     }
 }
 
-RequestPage.propTypes = {
+RequestPageComponent.propTypes = {
     navigation: PropTypes.object,
 };
 
-export default connect(null, null)(RequestPage);
+export const RequestPage = connect(null, null)(RequestPageComponent);

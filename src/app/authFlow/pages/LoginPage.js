@@ -11,7 +11,7 @@ import {
     Label,
     Page,
     Textbox,
-} from './common';
+} from '../../../components';
 
 // Actions
 import {
@@ -19,9 +19,9 @@ import {
     changeUserNameText,
     initializeLogin,
     submitLogin,
-} from '../actions/authActions';
+} from '../../../actions/authActions';
 
-class LoginPage extends Component {
+class LoginPageComponent extends Component {
     constructor() {
         super();
         this.initializePage = this.initializePage.bind(this);
@@ -100,7 +100,7 @@ class LoginPage extends Component {
     }
 }
 
-LoginPage.propTypes = {
+LoginPageComponent.propTypes = {
     // Dependencies
     navigation: PropTypes.object,
 
@@ -133,9 +133,9 @@ const mapStateToProps = (state) => ({
     userName: state.auth.loginUserName,
 });
 
-export default connect(mapStateToProps, {
+export const LoginPage = connect(mapStateToProps, {
     changePasswordText,
     changeUserNameText,
     initializeLogin,
     submitLogin,
-})(LoginPage);
+})(LoginPageComponent);

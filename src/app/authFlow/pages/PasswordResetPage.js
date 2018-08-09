@@ -12,7 +12,7 @@ import {
     Label,
     Page,
     Textbox,
-} from './common';
+} from '../../../components';
 
 // Actions
 import {
@@ -20,12 +20,12 @@ import {
     initializeLogin,
     initializePasswordReset,
     submitPasswordReset,
-} from '../actions/authActions';
+} from '../../../actions/authActions';
 
 // Utility
-import { validateEmail } from '../utility';
+import { validateEmail } from '../../../utility';
 
-class PasswordResetPage extends Component {
+class PasswordResetPageComponent extends Component {
     constructor() {
         super();
         this.onEmailChanged = this.onEmailChanged.bind(this);
@@ -95,7 +95,7 @@ class PasswordResetPage extends Component {
     }
 }
 
-PasswordResetPage.propTypes = {
+PasswordResetPageComponent.propTypes = {
     // Navigation
     navigation: PropTypes.object,
 
@@ -115,9 +115,9 @@ const mapStateToProps = (state) => ({
     passwordResetSuccess: state.auth.passwordResetSuccess,
 });
 
-export default connect(mapStateToProps, {
+export const PasswordResetPage = connect(mapStateToProps, {
     changePasswordResetEmail,
     initializeLogin,
     initializePasswordReset,
     submitPasswordReset,
-})(PasswordResetPage);
+})(PasswordResetPageComponent);

@@ -4,9 +4,9 @@ import { Text } from 'react-native';
 import { connect } from 'react-redux';
 
 // Components
-import { Page } from '../components/common';
+import { Page } from '../../../components';
 
-class RequestHistoryPage extends Component {
+class RequestHistoryPageComponent extends Component {
     render() {
         return (
             <Page title="Request History" navigate={this.props.navigation.navigate}>
@@ -16,8 +16,8 @@ class RequestHistoryPage extends Component {
     }
 }
 
-RequestHistoryPage.propTypes = {
+RequestHistoryPageComponent.propTypes = {
     navigation: PropTypes.object,
 };
 
-export default connect(null, null)(RequestHistoryPage);
+export const RequestHistoryPage = connect(null, null)(RequestHistoryPageComponent);

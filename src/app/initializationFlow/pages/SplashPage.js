@@ -2,21 +2,28 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { AsyncStorage, Text, View } from 'react-native';
-import { NavigationActions, StackActions } from 'react-navigation';
 import { connect } from 'react-redux';
 import Reactotron from 'reactotron-react-native';
 
 // App
-import { incrementSplashCounter } from '../actions/appActions';
-import { setAuthToken } from '../actions/authActions';
+import { incrementSplashCounter } from '../../../actions/appActions';
+import { setAuthToken } from '../../../actions/authActions';
 
-class SplashPage extends Component {
+class SplashPageComponent extends Component {
     constructor() {
         super();
-        this.holdTime = 1;
+        this.holdTime = 3;
     }
 
     componentDidMount() {
+        if (this.props.splashCounter < this.holdTime) {
+            setTimeout(() => {
+                this.props.incrementSplashCounter();
+            }, 1000);
+
+            return;
+        }
+
         AsyncStorage.getItem('auth_token')
             .then(item => {
                 if (item) {
@@ -43,12 +50,8 @@ class SplashPage extends Component {
             return;
         }
 
-        const routeName = this.props.authToken.length > 0 ? 'Dashboard' : 'Login';
-        const resetAction = StackActions.reset({
-            index: 0,
-            actions: [NavigationActions.navigate({ routeName })],
-        });
-        this.props.navigation.dispatch(resetAction);
+        const flowName = this.props.authToken.length > 0 ? 'Main' : 'Auth';
+        this.props.screenProps.rootNavigator.navigate(flowName);
     }
 
     render() {
@@ -67,9 +70,9 @@ class SplashPage extends Component {
     }
 }
 
-SplashPage.propTypes = {
+SplashPageComponent.propTypes = {
     // Dependencies,
-    navigation: PropTypes.object,
+    screenProps: PropTypes.object,
 
     // Properties
     authToken: PropTypes.string,
@@ -96,7 +99,7 @@ const mapStateToProps = (state) => ({
     splashCounter: state.app.splashCounter,
 });
 
-export default connect(mapStateToProps, {
+export const SplashPage = connect(mapStateToProps, {
     incrementSplashCounter,
     setAuthToken,
-})(SplashPage);
+})(SplashPageComponent);

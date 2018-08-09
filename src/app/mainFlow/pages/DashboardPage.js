@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 import { Text } from 'react-native';
 
 // Components
-import { Page } from './common';
+import { Page } from '../../../components';
 
-export default class DashboardPage extends Component {
+export class DashboardPage extends Component {
     componentWillMount() {
     }
 

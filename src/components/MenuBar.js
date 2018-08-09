@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { MenuIcon } from './MenuIcon';
 
 // App
-import { changeActiveTab } from '../../actions/appActions';
+import { changeActiveTab } from '../actions/appActions';
 
 class MenuBarComponent extends Component {
     changeActiveTab(tabName) {
@@ -44,8 +44,10 @@ class MenuBarComponent extends Component {
                 />
 
                 <MenuIcon
+                    active={getIsIconActive('Settings')}
                     iconLabel="Settings"
                     iconName="bars"
+                    onPress={() => this.changeActiveTab('Settings')}
                 />
             </View>
         );

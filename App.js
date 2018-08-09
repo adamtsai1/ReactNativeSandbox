@@ -9,7 +9,7 @@ import ReduxThunk from 'redux-thunk';
 // App
 import { LOGIN_SUCCESS } from './src/actions/authActionTypes';
 import reducers from './src/reducers';
-import Router from './src/Router';
+import AppRouter from './src/AppRouter';
 import './src/ReactotronConfig';
 
 class AppComponent extends Component {
@@ -29,9 +29,13 @@ class AppComponent extends Component {
             store.dispatch({ type: LOGIN_SUCCESS, payload: { token } });
         });
 
+        Reactotron.onCustomCommand('logout', () => {
+            AsyncStorage.removeItem('auth_token');
+        });
+
         return (
             <Provider store={store}>
-                <Router />
+                <AppRouter />
             </Provider>
         );
     }

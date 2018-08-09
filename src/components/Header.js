@@ -3,7 +3,7 @@ import React from 'react';
 import { Dimensions, Image, View } from 'react-native';
 
 // App
-import { FM_TEXT_LOGO } from '../../images';
+import { FM_TEXT_LOGO } from '../images';
 
 const win = Dimensions.get('window');
 
