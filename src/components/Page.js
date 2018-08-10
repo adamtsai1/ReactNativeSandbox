@@ -42,12 +42,12 @@ const styles = {
         color: '#fff',
         fontSize: 16,
         fontWeight: '600',
-        marginBottom: 8,
+        // marginBottom: 8,
         padding: 10,
         textAlign: 'center',
     },
     innerPageStyle: {
-        padding: 10,
+        // padding: 10,
     },
     outerPageStyle: {
         backgroundColor: '#fff',

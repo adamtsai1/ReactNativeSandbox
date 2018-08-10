@@ -4,4 +4,6 @@ export * from './Form';
 export * from './Header';
 export * from './Label';
 export * from './Page';
+export * from './PageBody';
+export * from './PrettyNumber';
 export * from './Textbox';

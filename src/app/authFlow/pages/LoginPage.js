@@ -1,6 +1,7 @@
 // Dependencies
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { View } from 'react-native';
 import { connect } from 'react-redux';
 
 // Components
@@ -10,6 +11,7 @@ import {
     Form,
     Label,
     Page,
+    PageBody,
     Textbox,
 } from '../../../components';
 
@@ -71,39 +73,41 @@ class LoginPageComponent extends Component {
 
         return (
             <Page title="Login">
-                <Form>
-                    <Label>User Name</Label>
-                    <Container style={{ marginBottom: 16 }}>
-                        <Textbox
-                            ref={(input) => { this.userNameInput = input; }}
-                            value={this.props.userName}
-                            onChangeText={this.onUserNameChanged}
-                        />
+                <PageBody>
+                    <Form>
+                        <Label>User Name</Label>
+                        <Container style={{ marginBottom: 16 }}>
+                            <Textbox
+                                ref={(input) => { this.userNameInput = input; }}
+                                value={this.props.userName}
+                                onChangeText={this.onUserNameChanged}
+                            />
+                        </Container>
+
+                        <Label>Password</Label>
+                        <Container>
+                            <Textbox
+                                secureTextEntry
+                                value={this.props.password}
+                                onChangeText={this.onPasswordChanged}
+                            />
+                        </Container>
+                    </Form>
+
+                    {errorMessage}
+
+                    <Container style={{ marginBottom: 8 }}>
+                        <Button disabled={submitButtonDisabled} onPress={this.onSubmitPressed}>
+                            Submit
+                        </Button>
                     </Container>
 
-                    <Label>Password</Label>
                     <Container>
-                        <Textbox
-                            secureTextEntry
-                            value={this.props.password}
-                            onChangeText={this.onPasswordChanged}
-                        />
+                        <Button onPress={() => this.props.navigation.navigate('PasswordReset')}>
+                            Forgot Password?
+                        </Button>
                     </Container>
-                </Form>
-
-                {errorMessage}
-
-                <Container style={{ marginBottom: 8 }}>
-                    <Button disabled={submitButtonDisabled} onPress={this.onSubmitPressed}>
-                        Submit
-                    </Button>
-                </Container>
-
-                <Container>
-                    <Button onPress={() => this.props.navigation.navigate('PasswordReset')}>
-                        Forgot Password?
-                    </Button>
-                </Container>
+                </PageBody>
             </Page>
         );
     }
@@ -112,7 +116,6 @@ class LoginPageComponent extends Component {
 LoginPageComponent.propTypes = {
     // Dependencies
     navigation: PropTypes.object,
-    screenProps: PropTypes.object,
 
     // Properties
     authToken: PropTypes.string,

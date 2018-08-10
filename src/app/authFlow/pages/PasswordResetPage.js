@@ -11,6 +11,7 @@ import {
     Form,
     Label,
     Page,
+    PageBody,
     Textbox,
 } from '../../../components';
 
@@ -89,7 +90,9 @@ class PasswordResetPageComponent extends Component {
 
         return (
             <Page title="Password Reset">
-                {passwordResetContent}
+                <PageBody>
+                    {passwordResetContent}
+                </PageBody>
             </Page>
         );
     }
