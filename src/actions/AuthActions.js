@@ -20,7 +20,7 @@ import {
     PASSWORD_RESET_SUCCESS,
 } from './authActionTypes';
 
-import { login, resetPassword } from '../api';
+import { login, resetPassword } from '../api/user';
 
 export const changePasswordResetEmail = (email) => ({
     type: PASSWORD_RESET_EMAIL_CHANGE,

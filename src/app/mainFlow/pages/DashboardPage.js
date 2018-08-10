@@ -1,17 +1,29 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { View } from 'react-native';
+import { connect } from 'react-redux';
 
 // App
+import { fetchPendingRequests, fetchUpcomingRequests } from '../../../actions/timeOffActions';
+import {
+    CircleWithLabel,
+    Page,
+    TimeOffList,
+} from '../../../components';
 import { Colors } from '../../../utility';
-import { CircleWithLabel, Page } from '../../../components';
 
-export class DashboardPage extends Component {
+class DashboardPageComponent extends Component {
     componentWillMount() {
+        this.props.fetchPendingRequests(1);
+        this.props.fetchUpcomingRequests(1);
     }
 
     render() {
-        const { overviewContainerStyle } = styles;
+        const {
+            listContainerStyle,
+            overviewContainerStyle,
+        } = styles;
+
         return (
             <Page title="Dashboard">
                 <View style={overviewContainerStyle}>
@@ -36,16 +48,39 @@ export class DashboardPage extends Component {
                         labelText="Accrued"
                     />
                 </View>
+
+                <View style={listContainerStyle}>
+                    <TimeOffList
+                        title="Pending Requests"
+                        items={this.props.pendingRequests}
+                    />
+                </View>
+
+                <View style={listContainerStyle}>
+                    <TimeOffList
+                        title="Upcoming Time Off"
+                        items={this.props.upcomingRequests}
+                    />
+                </View>
             </Page>
         );
     }
 }
 
-DashboardPage.propTypes = {
-    navigation: PropTypes.object,
+DashboardPageComponent.propTypes = {
+    // Properties
+    pendingRequests: PropTypes.array,
+    upcomingRequests: PropTypes.array,
+
+    // Functions
+    fetchPendingRequests: PropTypes.func,
+    fetchUpcomingRequests: PropTypes.func,
 };
 
 const styles = {
+    listContainerStyle: {
+        marginBottom: 30,
+    },
     overviewContainerStyle: {
         backgroundColor: Colors.darkGray,
         flexDirection: 'row',
@@ -54,3 +89,13 @@ const styles = {
         paddingTop: 10,
     },
 };
+
+const mapStateToProps = (state) => ({
+    pendingRequests: state.timeOff.pendingRequests,
+    upcomingRequests: state.timeOff.upcomingRequests,
+});
+
+export const DashboardPage = connect(mapStateToProps, {
+    fetchPendingRequests,
+    fetchUpcomingRequests,
+})(DashboardPageComponent);
