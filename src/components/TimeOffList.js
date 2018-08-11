@@ -19,7 +19,7 @@ export const TimeOffList = ({ items, loading, title }) => {
     } else if (items.length === 0) {
         content = <Text>No requests</Text>;
     } else {
-        content = items.map(item => <TimeOffListItem item={item} />);
+        content = items.map(item => <TimeOffListItem item={item} key={item.id} style={{ marginBottom: 16 }} />);
     }
 
     return (
