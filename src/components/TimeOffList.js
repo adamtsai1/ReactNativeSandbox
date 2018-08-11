@@ -6,7 +6,7 @@ import { Text, View } from 'react-native';
 import { TimeOffListItem } from './TimeOffListItem';
 import { Colors } from '../utility';
 
-export const TimeOffList = ({ items, title }) => {
+export const TimeOffList = ({ items, loading, title }) => {
     const {
         contentContainerStyle,
         headerStyle,
@@ -14,7 +14,7 @@ export const TimeOffList = ({ items, title }) => {
     } = styles;
 
     let content;
-    if (!items) {
+    if (loading) {
         content = <Text>Loading...</Text>;
     } else if (items.length === 0) {
         content = <Text>No requests</Text>;
@@ -37,6 +37,7 @@ export const TimeOffList = ({ items, title }) => {
 
 TimeOffList.propTypes = {
     items: PropTypes.array,
+    loading: PropTypes.bool,
     title: PropTypes.string,
 };
 

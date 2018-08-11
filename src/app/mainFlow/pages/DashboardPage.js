@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { Text, View } from 'react-native';
 import { connect } from 'react-redux';
 
 // App
@@ -14,6 +14,8 @@ import { Colors } from '../../../utility';
 
 class DashboardPageComponent extends Component {
     componentWillMount() {
+        // Loading reducer
+
         this.props.fetchPendingRequests(1);
         this.props.fetchUpcomingRequests(1);
     }
@@ -53,6 +55,7 @@ class DashboardPageComponent extends Component {
                     <TimeOffList
                         title="Pending Requests"
                         items={this.props.pendingRequests}
+                        loading={this.props.pendingRequestsLoading}
                     />
                 </View>
 
@@ -60,6 +63,7 @@ class DashboardPageComponent extends Component {
                     <TimeOffList
                         title="Upcoming Time Off"
                         items={this.props.upcomingRequests}
+                        loading={this.props.upcomingRequestsLoading}
                     />
                 </View>
             </Page>
@@ -70,7 +74,9 @@ class DashboardPageComponent extends Component {
 DashboardPageComponent.propTypes = {
     // Properties
     pendingRequests: PropTypes.array,
+    pendingRequestsLoading: PropTypes.bool,
     upcomingRequests: PropTypes.array,
+    upcomingRequestsLoading: PropTypes.bool,
 
     // Functions
     fetchPendingRequests: PropTypes.func,
@@ -92,7 +98,9 @@ const styles = {
 
 const mapStateToProps = (state) => ({
     pendingRequests: state.timeOff.pendingRequests,
+    pendingRequestsLoading: state.timeOff.pendingRequestsLoading,
     upcomingRequests: state.timeOff.upcomingRequests,
+    upcomingRequestsLoading: state.timeOff.upcomingRequestsLoading,
 });
 
 export const DashboardPage = connect(mapStateToProps, {
