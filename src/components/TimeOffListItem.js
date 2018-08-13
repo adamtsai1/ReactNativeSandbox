@@ -9,8 +9,10 @@ export const TimeOffListItem = ({ item, style }) => {
     const { containerStyle, iconStyle } = styles;
     let icon;
     let color;
-    let dayLabel = item.total_days === 1 ? 'day' : 'days';
-    let hourLabel = item.total_hours === 1 ? 'hour' : 'hours';
+    const startDateText = moment(item.start_date, 'YYYY-MM-DD').format('MMMM d YYYY');
+    const endDateText = moment(item.end_date, 'YYYY-MM-DD').format('MMMM d YYYY');
+    const dayLabel = item.total_days === 1 ? 'day' : 'days';
+    const hourLabel = item.total_hours === 1 ? 'hour' : 'hours';
 
     switch (item.status) {
         case 'pending':
@@ -38,7 +40,7 @@ export const TimeOffListItem = ({ item, style }) => {
             />
 
             <Text>
-                {moment(item.start_date).format('MMMM d YYYY')} - {moment(item.end_date).format('MMMM d YYYY')}
+                {startDateText} - {endDateText}
                 {'\n'}
                 {item.total_days} {dayLabel} - {item.total_hours} {hourLabel}
             </Text>

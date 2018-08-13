@@ -1,5 +1,4 @@
 // Dependencies
-import PropTypes from 'prop-types';
 import React from 'react';
 import { createStackNavigator } from 'react-navigation';
 

@@ -1,21 +1,19 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { connect } from 'react-redux';
 
 // App
-import { fetchPendingRequests, fetchUpcomingRequests } from '../../../actions/timeOffActions';
+import { fetchPendingRequests, fetchUpcomingRequests } from '../../../../../actions/timeOffActions';
 import {
     CircleWithLabel,
     Page,
     TimeOffList,
-} from '../../../components';
-import { Colors } from '../../../utility';
+} from '../../../../../components';
+import { Colors } from '../../../../../utility';
 
-class DashboardPageComponent extends Component {
+class OverviewPageComponent extends Component {
     componentWillMount() {
-        // Loading reducer
-
         this.props.fetchPendingRequests(1);
         this.props.fetchUpcomingRequests(1);
     }
@@ -71,7 +69,7 @@ class DashboardPageComponent extends Component {
     }
 }
 
-DashboardPageComponent.propTypes = {
+OverviewPageComponent.propTypes = {
     // Properties
     pendingRequests: PropTypes.array,
     pendingRequestsLoading: PropTypes.bool,
@@ -103,7 +101,7 @@ const mapStateToProps = (state) => ({
     upcomingRequestsLoading: state.timeOff.upcomingRequestsLoading,
 });
 
-export const DashboardPage = connect(mapStateToProps, {
+export const OverviewPage = connect(mapStateToProps, {
     fetchPendingRequests,
     fetchUpcomingRequests,
-})(DashboardPageComponent);
+})(OverviewPageComponent);

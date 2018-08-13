@@ -9,7 +9,7 @@ import { Page } from '../../../components';
 class RequestPageComponent extends Component {
     render() {
         return (
-            <Page title="Request Time Off" navigate={this.props.navigation.navigate}>
+            <Page title="Request Time Off" navigate={this.props.navigation.navigate} style={{ borderWidth: 1, borderColor: 'red' }}>
                 <Text>Request Time Off</Text>
             </Page>
         );

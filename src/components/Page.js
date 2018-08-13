@@ -14,7 +14,7 @@ class PageComponent extends Component {
         } = styles;
 
         return (
-            <View style={outerPageStyle}>
+            <View style={[outerPageStyle, this.props.style]}>
                 <View style={contentContainerStyle}>
                     <Spinner visible={this.props.loading} />
                     <Text style={headerStyle}>{this.props.title}</Text>
@@ -30,6 +30,7 @@ class PageComponent extends Component {
 PageComponent.propTypes = {
     children: PropTypes.any,
     loading: PropTypes.bool,
+    style: PropTypes.object,
     title: PropTypes.string,
 };
 

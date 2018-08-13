@@ -6,15 +6,16 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 // Components
 import { Header } from '../../components';
 import {
-    DashboardPage,
     RequestHistoryPage,
     RequestPage,
     SettingsPage,
 } from './pages';
 
+import DashboardNavigator from './subFlows/dashboardFlow/DashboardNavigator';
+
 const tabNavigatorRoutes = {
     dashboard: {
-        screen: DashboardPage,
+        screen: DashboardNavigator,
         navigationOptions: {
             tabBarIcon: (props) => <Icon name="tachometer" size={28} color={props.tintColor} />,
             tabBarLabel: 'Dashboard',
