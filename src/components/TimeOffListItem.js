@@ -1,11 +1,11 @@
 import moment from 'moment/src/moment';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Colors } from '../utility';
 
-export const TimeOffListItem = ({ item, style }) => {
+export const TimeOffListItem = ({ item, style, onPress }) => {
     const { containerStyle, iconStyle } = styles;
     let icon;
     let color;
@@ -30,7 +30,7 @@ export const TimeOffListItem = ({ item, style }) => {
     }
 
     return (
-        <View style={[containerStyle, style]}>
+        <TouchableOpacity style={[containerStyle, style]} onPress={onPress}>
             <Icon
                 alignSelf="center"
                 name={icon}
@@ -44,13 +44,14 @@ export const TimeOffListItem = ({ item, style }) => {
                 {'\n'}
                 {item.total_days} {dayLabel} - {item.total_hours} {hourLabel}
             </Text>
-        </View>
+        </TouchableOpacity>
     );
 };
 
 TimeOffListItem.propTypes = {
     item: PropTypes.object,
     style: PropTypes.object,
+    onPress: PropTypes.func,
 };
 
 const styles = {

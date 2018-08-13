@@ -6,7 +6,7 @@ import { Text, View } from 'react-native';
 import { TimeOffListItem } from './TimeOffListItem';
 import { Colors } from '../utility';
 
-export const TimeOffList = ({ items, loading, title }) => {
+export const TimeOffList = ({ items, loading, title, onItemSelect }) => {
     const {
         contentContainerStyle,
         headerStyle,
@@ -19,7 +19,14 @@ export const TimeOffList = ({ items, loading, title }) => {
     } else if (items.length === 0) {
         content = <Text>No requests</Text>;
     } else {
-        content = items.map(item => <TimeOffListItem item={item} key={item.id} style={{ marginBottom: 16 }} />);
+        content = items.map(item => (
+            <TimeOffListItem
+                item={item}
+                key={item.id}
+                style={{ marginBottom: 16 }}
+                onPress={() => onItemSelect(item)}
+            />
+        ));
     }
 
     return (
@@ -39,6 +46,7 @@ TimeOffList.propTypes = {
     items: PropTypes.array,
     loading: PropTypes.bool,
     title: PropTypes.string,
+    onItemSelect: PropTypes.func,
 };
 
 const styles = {

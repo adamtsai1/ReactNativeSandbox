@@ -5,17 +5,23 @@ import { connect } from 'react-redux';
 
 // App
 import { fetchPendingRequests, fetchUpcomingRequests } from '../../../../../actions/timeOffActions';
-import {
-    CircleWithLabel,
-    Page,
-    TimeOffList,
-} from '../../../../../components';
+import { CircleWithLabel, TimeOffList } from '../../../../../components';
 import { Colors } from '../../../../../utility';
 
 class OverviewPageComponent extends Component {
+    constructor() {
+        super();
+
+        this.viewTimeOffRequestDetail = this.viewTimeOffRequestDetail.bind(this);
+    }
+
     componentWillMount() {
         this.props.fetchPendingRequests(1);
         this.props.fetchUpcomingRequests(1);
+    }
+
+    viewTimeOffRequestDetail(timeOffRequest) {
+        this.props.navigation.navigate('requestView');
     }
 
     render() {
@@ -25,7 +31,7 @@ class OverviewPageComponent extends Component {
         } = styles;
 
         return (
-            <Page title="Dashboard">
+            <View>
                 <View style={overviewContainerStyle}>
                     <CircleWithLabel
                         circleColor={Colors.white}
@@ -54,6 +60,7 @@ class OverviewPageComponent extends Component {
                         title="Pending Requests"
                         items={this.props.pendingRequests}
                         loading={this.props.pendingRequestsLoading}
+                        onItemSelect={this.viewTimeOffRequestDetail}
                     />
                 </View>
 
@@ -62,14 +69,18 @@ class OverviewPageComponent extends Component {
                         title="Upcoming Time Off"
                         items={this.props.upcomingRequests}
                         loading={this.props.upcomingRequestsLoading}
+                        onItemSelect={this.viewTimeOffRequestDetail}
                     />
                 </View>
-            </Page>
+            </View>
         );
     }
 }
 
 OverviewPageComponent.propTypes = {
+    // Dependencies
+    navigation: PropTypes.object,
+
     // Properties
     pendingRequests: PropTypes.array,
     pendingRequestsLoading: PropTypes.bool,
