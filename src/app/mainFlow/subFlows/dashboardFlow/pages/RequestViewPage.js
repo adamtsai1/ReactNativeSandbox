@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { View } from 'react-native';
+import { ScrollView } from 'react-native';
 import { TimeOffRequestForm } from '../../../../../components';
 
 export const RequestViewPage = ({ navigation }) => {
@@ -8,9 +8,9 @@ export const RequestViewPage = ({ navigation }) => {
     const timeOffRequest = navigation.state.params.timeOffRequest;
 
     return (
-        <View style={containerStyle}>
+        <ScrollView style={containerStyle}>
             <TimeOffRequestForm timeOffRequest={timeOffRequest} />
-        </View>
+        </ScrollView>
     );
 };
 

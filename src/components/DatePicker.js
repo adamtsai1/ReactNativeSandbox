@@ -1,17 +1,9 @@
 import { DatePicker } from 'native-base';
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { View } from 'react-native';
 
 export default class DatePickerComponent extends Component {
-    constructor() {
-        super();
-        this.setDate = this.setDate.bind(this);
-    }
-
-    setDate(newDate) {
-        this.setState({ chosenDate: newDate });
-    }
-
     render() {
         const { containerStyle, datepickerPlaceholderTextStyle, datepickerTextStyle } = styles;
 
@@ -22,12 +14,16 @@ export default class DatePickerComponent extends Component {
                     placeHolderTextStyle={datepickerPlaceholderTextStyle}
                     textStyle={datepickerTextStyle}
                     formatChosenDate={date => [date.getFullYear(), date.getMonth() + 1, date.getDate()].join('-')}
-                    onDateChange={this.setDate}
+                    onDateChange={this.props.onDateChange}
                 />
             </View>
         );
     }
 }
+
+DatePickerComponent.propTypes = {
+    onDateChange: PropTypes.func,
+};
 
 const styles = {
     containerStyle: {

@@ -1,7 +1,7 @@
 import { simulateDelay } from './common';
 
 export const fetchTimeOffRequests = (userId, type) => {
-    return simulateDelay(2000).then(() => {
+    return simulateDelay(500).then(() => {
         if (type === 'pending') {
             return {
                 data: [{

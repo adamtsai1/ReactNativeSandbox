@@ -23,7 +23,7 @@ export const TimeOffList = ({ items, loading, title, onItemSelect }) => {
             <TimeOffListItem
                 item={item}
                 key={item.id}
-                style={{ marginBottom: 16 }}
+                style={{ marginBottom: 20 }}
                 onPress={() => onItemSelect(item)}
             />
         ));
@@ -56,6 +56,7 @@ const styles = {
     },
     headerStyle: {
         backgroundColor: Colors.lightestGray,
+        marginBottom: 8,
         padding: 10,
     },
     titleStyle: {
