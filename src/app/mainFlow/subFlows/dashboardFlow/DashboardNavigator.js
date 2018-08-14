@@ -1,31 +1,31 @@
 import React from 'react';
-import { Text } from 'react-native';
-import { createStackNavigator } from 'react-navigation';
+import { Text, View } from 'react-native';
+import { createStackNavigator, HeaderBackButton } from 'react-navigation';
 import { OverviewPage, RequestViewPage } from './pages';
 
 const navigatorRoutes = {
-    overview: OverviewPage,
-    requestView: RequestViewPage,
+    overview: {
+        screen: OverviewPage,
+    },
+    requestView: {
+        screen: RequestViewPage,
+    },
 };
 
 const navigatorConfig = {
+    headerMode: 'float',
     initialRouteName: 'overview',
-    // headerMode: 'none',
-    navigationOptions: {
-        // headerVisible: false,
-        header: () => (
-            <Text
-                style={{
-                    backgroundColor: '#d1de3a',
-                    color: '#fff',
-                    fontSize: 16,
-                    fontWeight: '600',
-                    padding: 10,
-                    textAlign: 'center',
-                }}
-            >Dashboard</Text>
-        ),
-    },
+    navigationOptions: () => ({
+        headerBackTitle: null,
+        headerForceInset: { top: 'never', bottom: 'never' },
+        headerStyle: { backgroundColor: '#d1de3a' },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+            fontSize: 16,
+            fontWeight: '600',
+        },
+        title: 'Dashboard',
+    }),
 };
 
 export default createStackNavigator(navigatorRoutes, navigatorConfig);
