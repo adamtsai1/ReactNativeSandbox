@@ -51,6 +51,7 @@ TimeOffList.propTypes = {
 
 const styles = {
     contentContainerStyle: {
+        backgroundColor: Colors.white,
         padding: 10,
     },
     headerStyle: {

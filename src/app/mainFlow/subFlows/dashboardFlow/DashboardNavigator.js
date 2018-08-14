@@ -1,6 +1,4 @@
-import React from 'react';
-import { Text, View } from 'react-native';
-import { createStackNavigator, HeaderBackButton } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation';
 import { OverviewPage, RequestViewPage } from './pages';
 
 const navigatorRoutes = {

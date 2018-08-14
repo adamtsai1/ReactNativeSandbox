@@ -7,6 +7,7 @@ import { createLogger } from 'redux-logger';
 import ReduxThunk from 'redux-thunk';
 
 // App
+import StoryBookUI from './storybook';
 import { LOGIN_SUCCESS } from './src/actions/authActionTypes';
 import reducers from './src/reducers';
 import AppRouter from './src/AppRouter';
@@ -36,6 +37,7 @@ class AppComponent extends Component {
         return (
             <Provider store={store}>
                 <AppRouter />
+                {/* <StoryBookUI /> */}
             </Provider>
         );
     }

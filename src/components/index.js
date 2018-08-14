@@ -1,3 +1,5 @@
+import DatePicker from './DatePicker';
+
 export * from './Button';
 export * from './CircleWithLabel';
 export * from './Container';
@@ -10,3 +12,4 @@ export * from './PageBody';
 export * from './Textbox';
 export * from './TimeOffList';
 export * from './TimeOffRequestForm';
+export { DatePicker };

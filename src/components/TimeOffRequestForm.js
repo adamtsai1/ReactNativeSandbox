@@ -1,15 +1,21 @@
-import React, { Component } from 'react';
+import { DatePicker } from 'native-base';
+import React from 'react';
 import { Text, View } from 'react-native';
-import { connect } from 'react-redux';
 
-class TimeOffRequestFormComponent extends Component {
-    render() {
-        return (
-            <View>
-                <Text>Time off request form</Text>
-            </View>
-        );
-    }
-}
+export const TimeOffRequestForm = ({ timeOffRequest }) => {
+    const { datepickerStyle } = styles;
+    return (
+        <View>
+            <Text>Start Date</Text>
+            <DatePicker style/>
+        </View>
+    );
+};
 
-export const TimeOffRequestForm = connect(null, null)(TimeOffRequestFormComponent);
+const styles = {
+    datepickerStyle: {
+
+    },
+};
+
+// export const TimeOffRequestForm = connect(null, null)(TimeOffRequestFormComponent);

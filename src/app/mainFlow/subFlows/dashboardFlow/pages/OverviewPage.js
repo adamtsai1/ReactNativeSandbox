@@ -11,7 +11,6 @@ import { Colors } from '../../../../../utility';
 class OverviewPageComponent extends Component {
     constructor() {
         super();
-
         this.viewTimeOffRequestDetail = this.viewTimeOffRequestDetail.bind(this);
     }
 
@@ -21,12 +20,13 @@ class OverviewPageComponent extends Component {
     }
 
     viewTimeOffRequestDetail(timeOffRequest) {
-        this.props.navigation.navigate('requestView');
+        this.props.navigation.navigate('requestView', { timeOffRequest });
     }
 
     render() {
         const {
             listContainerStyle,
+            listSectionStyle,
             overviewContainerStyle,
         } = styles;
 
@@ -55,22 +55,24 @@ class OverviewPageComponent extends Component {
                     />
                 </View>
 
-                <View style={listContainerStyle}>
-                    <TimeOffList
-                        title="Pending Requests"
-                        items={this.props.pendingRequests}
-                        loading={this.props.pendingRequestsLoading}
-                        onItemSelect={this.viewTimeOffRequestDetail}
-                    />
-                </View>
+                <View style={listSectionStyle}>
+                    <View style={listContainerStyle}>
+                        <TimeOffList
+                            title="Pending Requests"
+                            items={this.props.pendingRequests}
+                            loading={this.props.pendingRequestsLoading}
+                            onItemSelect={this.viewTimeOffRequestDetail}
+                        />
+                    </View>
 
-                <View style={listContainerStyle}>
-                    <TimeOffList
-                        title="Upcoming Time Off"
-                        items={this.props.upcomingRequests}
-                        loading={this.props.upcomingRequestsLoading}
-                        onItemSelect={this.viewTimeOffRequestDetail}
-                    />
+                    <View style={listContainerStyle}>
+                        <TimeOffList
+                            title="Upcoming Time Off"
+                            items={this.props.upcomingRequests}
+                            loading={this.props.upcomingRequestsLoading}
+                            onItemSelect={this.viewTimeOffRequestDetail}
+                        />
+                    </View>
                 </View>
             </View>
         );
@@ -95,6 +97,9 @@ OverviewPageComponent.propTypes = {
 const styles = {
     listContainerStyle: {
         marginBottom: 30,
+    },
+    listSectionStyle: {
+        backgroundColor: Colors.white,
     },
     overviewContainerStyle: {
         backgroundColor: Colors.darkGray,
