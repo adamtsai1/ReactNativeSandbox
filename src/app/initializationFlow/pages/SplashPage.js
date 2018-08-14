@@ -80,6 +80,7 @@ SplashPageComponent.propTypes = {
 
 const styles = {
     containerStyle: {
+        backgroundColor: '#fff',
         flex: 1,
         justifyContent: 'center',
     },

@@ -1,20 +1,20 @@
-import { DatePicker } from 'native-base';
 import React from 'react';
 import { Text, View } from 'react-native';
+import { DatePicker, Label } from '../components';
 
 export const TimeOffRequestForm = ({ timeOffRequest }) => {
     const { datepickerStyle } = styles;
     return (
         <View>
-            <Text>Start Date</Text>
-            <DatePicker style/>
+            <Label>Start Date</Label>
+            <DatePicker />
         </View>
     );
 };
 
 const styles = {
     datepickerStyle: {
-
+        
     },
 };
 

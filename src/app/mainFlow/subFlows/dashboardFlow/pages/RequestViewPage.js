@@ -20,6 +20,8 @@ RequestViewPage.propTypes = {
 
 const styles = {
     containerStyle: {
+        backgroundColor: '#fff',
+        flex: 1,
         paddingBottom: 10,
         paddingLeft: 10,
         paddingRight: 10,
