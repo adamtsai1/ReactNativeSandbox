@@ -11,6 +11,7 @@ import StoryBookUI from './storybook';
 import { LOGIN_SUCCESS } from './src/actions/authActionTypes';
 import reducers from './src/reducers';
 import AppRouter from './src/AppRouter';
+import AppStoreService from './src/AppStore';
 import './src/ReactotronConfig';
 
 class AppComponent extends Component {
@@ -23,6 +24,8 @@ class AppComponent extends Component {
                 ReduxThunk,
                 loggerMiddleware,
             ));
+
+        AppStoreService.setStore(store);
 
         Reactotron.onCustomCommand('login', () => {
             const token = 'ABC123';

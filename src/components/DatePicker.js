@@ -5,6 +5,10 @@ import { View } from 'react-native';
 import { Colors } from '../utility';
 
 export default class DatePickerComponent extends Component {
+    setDate(value) {
+        this.datepicker.setDate(value);
+    }
+
     render() {
         const { containerStyle, datepickerPlaceholderTextStyle, datepickerTextStyle } = styles;
         const containerStyleUpdated = { ...containerStyle };
@@ -13,12 +17,13 @@ export default class DatePickerComponent extends Component {
         if (this.props.disabled) {
             containerStyleUpdated.backgroundColor = Colors.lightestGray;
         }
-        
+
         return (
             <View style={containerStyleUpdated}>
                 <DatePicker
                     {...this.props}
                     placeHolderTextStyle={datepickerPlaceholderTextStyle}
+                    ref={datepicker => { this.datepicker = datepicker; }}
                     textStyle={datepickerTextStyle}
                     formatChosenDate={date => [date.getFullYear(), date.getMonth() + 1, date.getDate()].join('-')}
                     onDateChange={this.props.onDateChange}

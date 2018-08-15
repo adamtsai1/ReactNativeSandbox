@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Text } from 'react-native';
+import { View } from 'react-native';
 import { connect } from 'react-redux';
 
 // App
@@ -13,9 +13,11 @@ import {
     changeReturnDateValue,
     changeStartDateValue,
     loadTimeOffRequestModel,
+    resetTimeOffRequestModel,
 } from '../actions/timeOffFormActions';
 
 import {
+    Button,
     Container,
     Form,
     FormRow,
@@ -27,14 +29,29 @@ import {
 
 class TimeOffRequestFormComponent extends Component {
     componentWillMount() {
+        // debugger
+
         if (this.props.timeOffRequest) {
             this.props.loadTimeOffRequestModel(this.props.timeOffRequest);
+        } else {
+            this.props.resetTimeOffRequestModel();
         }
     }
 
-    componentDidUpdate() {
-        if (this.props.onFormChange) {
-            this.props.onFormChange({ valid: this.isFormValid() });
+    componentDidMount() {
+        const timeOffRequest = this.props.timeOffRequest;
+        if (timeOffRequest) {
+            if (timeOffRequest.start_date) {
+                this.startDatePicker.setDate(timeOffRequest.start_date);
+            }
+
+            if (timeOffRequest.end_date) {
+                this.endDatePicker.setDate(timeOffRequest.end_date);
+            }
+
+            if (timeOffRequest.return_date) {
+                this.returnDatePicker.setDate(timeOffRequest.return_date);
+            }
         }
     }
 
@@ -48,49 +65,8 @@ class TimeOffRequestFormComponent extends Component {
     }
 
     render() {
-        let startDatePicker = null;
-        let endDatePicker = null;
-        let returnDatePicker = null;
         let managerCommentsTextarea = null;
-
-        if (!this.props.timeOffRequest
-            || !this.props.timeOffRequest.start_date
-            || (this.props.timeOffRequest.start_date && this.props.startDate)) {
-
-            startDatePicker = (
-                <DatePicker
-                    defaultDate={this.props.startDate}
-                    disabled={this.props.editable === false}
-                    onDateChange={this.props.changeStartDateValue}
-                />
-            );
-        }
-
-        if (!this.props.timeOffRequest
-            || !this.props.timeOffRequest.end_date
-            || (this.props.timeOffRequest.end_date && this.props.endDate)) {
-
-            endDatePicker = (
-                <DatePicker
-                    defaultDate={this.props.endDate}
-                    disabled={this.props.editable === false}
-                    onDateChange={this.props.changeEndDateValue}
-                />
-            );
-        }
-
-        if (!this.props.timeOffRequest
-            || !this.props.timeOffRequest.return_date
-            || (this.props.timeOffRequest.return_date && this.props.returnDate)) {
-
-            returnDatePicker = (
-                <DatePicker
-                    defaultDate={this.props.returnDate}
-                    disabled={this.props.editable === false}
-                    onDateChange={this.props.changeReturnDateValue}
-                />
-            );
-        }
+        let submitButton = null;
 
         if (this.props.timeOffRequest && this.props.timeOffRequest.status === 'approved') {
             managerCommentsTextarea = (
@@ -107,58 +83,79 @@ class TimeOffRequestFormComponent extends Component {
             );
         }
 
+        const status = this.props.timeOffRequest ? (this.props.timeOffRequest.status || '') : '';
+        if (status !== 'pending' && status !== 'approved') {
+            submitButton = <Button disabled={!this.isFormValid()}>Submit</Button>;
+        }
+
         return (
-            <Form>
-                <FormRow>
-                    <Label>Start Date</Label>
-                    {startDatePicker}
-                </FormRow>
-
-                <FormRow>
-                    <Label>End Date</Label>
-                    {endDatePicker}
-                </FormRow>
-
-                <FormRow>
-                    <Label>Return Date</Label>
-                    {returnDatePicker}
-                </FormRow>
-
-                <FormRow>
-                    <Label>Details</Label>
-                    <Container>
-                        <Textarea
-                            editable={this.props.editable}
-                            value={this.props.details}
-                            onChangeText={this.props.changeDetailsText}
+            <View>
+                <Form>
+                    <FormRow>
+                        <Label>Start Date</Label>
+                        <DatePicker
+                            disabled={this.props.editable === false}
+                            ref={(datepicker) => { this.startDatePicker = datepicker; }}
+                            onDateChange={this.props.changeStartDateValue}
                         />
-                    </Container>
-                </FormRow>
+                    </FormRow>
 
-                <FormRow>
-                    <Label>Number of Days Out</Label>
-                    <Container>
-                        <Textbox
-                            editable={this.props.editable}
-                            value={String(this.props.daysOut)}
-                            onChangeText={text => this.props.changeDaysOutValue(Number(text))}
+                    <FormRow>
+                        <Label>End Date</Label>
+                        <DatePicker
+                            disabled={this.props.editable === false}
+                            ref={(datepicker) => { this.endDatePicker = datepicker; }}
+                            onDateChange={this.props.changeEndDateValue}
                         />
-                    </Container>
-                </FormRow>
+                    </FormRow>
 
-                <FormRow>
-                    <Label>Number of Days Used</Label>
-                    <Container>
-                        <Textbox
-                            editable={this.props.editable}
-                            value={String(this.props.daysUsed)}
-                            onChangeText={text => this.props.changeDaysUsedValue(Number(text))}
+                    <FormRow>
+                        <Label>Return Date</Label>
+                        <DatePicker
+                            disabled={this.props.editable === false}
+                            ref={(datepicker) => { this.returnDatePicker = datepicker; }}
+                            onDateChange={this.props.changeReturnDateValue}
                         />
-                    </Container>
-                </FormRow>
+                    </FormRow>
 
-                {managerCommentsTextarea}
-            </Form>
+                    <FormRow>
+                        <Label>Details</Label>
+                        <Container>
+                            <Textarea
+                                editable={this.props.editable}
+                                value={this.props.details}
+                                onChangeText={this.props.changeDetailsText}
+                            />
+                        </Container>
+                    </FormRow>
+
+                    <FormRow>
+                        <Label>Number of Days Out</Label>
+                        <Container>
+                            <Textbox
+                                editable={this.props.editable}
+                                value={String(this.props.daysOut)}
+                                onChangeText={text => this.props.changeDaysOutValue(Number(text))}
+                            />
+                        </Container>
+                    </FormRow>
+
+                    <FormRow>
+                        <Label>Number of Days Used</Label>
+                        <Container>
+                            <Textbox
+                                editable={this.props.editable}
+                                value={String(this.props.daysUsed)}
+                                onChangeText={text => this.props.changeDaysUsedValue(Number(text))}
+                            />
+                        </Container>
+                    </FormRow>
+
+                    {managerCommentsTextarea}
+                </Form>
+
+                {submitButton}
+            </View>
         );
     }
 }
@@ -183,8 +180,8 @@ TimeOffRequestFormComponent.propTypes = {
     changeManagerCommentsText: PropTypes.func,
     changeReturnDateValue: PropTypes.func,
     changeStartDateValue: PropTypes.func,
-    onFormChange: PropTypes.func,
     loadTimeOffRequestModel: PropTypes.func,
+    resetTimeOffRequestModel: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
@@ -206,4 +203,5 @@ export const TimeOffRequestForm = connect(mapStateToProps, {
     changeReturnDateValue,
     changeStartDateValue,
     loadTimeOffRequestModel,
+    resetTimeOffRequestModel,
 })(TimeOffRequestFormComponent);

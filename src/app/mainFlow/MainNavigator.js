@@ -4,6 +4,8 @@ import { createBottomTabNavigator, createStackNavigator } from 'react-navigation
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 // Components
+import AppStoreService from '../../AppStore';
+import { resetTimeOffRequestModel } from '../../actions/timeOffFormActions';
 import { Header } from '../../components';
 import {
     RequestHistoryPage,
@@ -26,6 +28,10 @@ const tabNavigatorRoutes = {
         navigationOptions: {
             tabBarIcon: (props) => <Icon name="calendar" size={28} color={props.tintColor} />,
             tabBarLabel: 'Request Time Off',
+            tabBarOnPress: (eventArgs) => {
+                AppStoreService.dispatch(resetTimeOffRequestModel());
+                eventArgs.defaultHandler();
+            },
         },
     },
     history: {
