@@ -6,9 +6,9 @@ export const fetchTimeOffRequests = (userId, type) => {
             return {
                 data: [{
                     id: 1,
-                    start_date: new Date(2018, 11, 1),
-                    end_date: new Date(2018, 11, 3),
-                    return_date: new Date(2018, 11, 4),
+                    start_date: new Date(2018, 10, 1),
+                    end_date: new Date(2018, 10, 3),
+                    return_date: new Date(2018, 10, 4),
                     days_out: 3,
                     days_used: 3,
                     status: 'pending',
@@ -16,9 +16,9 @@ export const fetchTimeOffRequests = (userId, type) => {
                     manager_comments: '',
                 }, {
                     id: 2,
-                    start_date: new Date(2018, 12, 20),
-                    end_date: new Date(2018, 12, 20),
-                    return_date: new Date(2018, 12, 21),
+                    start_date: new Date(2018, 11, 20),
+                    end_date: new Date(2018, 11, 20),
+                    return_date: new Date(2018, 11, 21),
                     days_out: 1,
                     days_used: 1,
                     status: 'pending',

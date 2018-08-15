@@ -32,10 +32,26 @@ class TimeOffRequestFormComponent extends Component {
         }
     }
 
+    componentDidUpdate() {
+        if (this.props.onFormChange) {
+            this.props.onFormChange({ valid: this.isFormValid() });
+        }
+    }
+
+    isFormValid() {
+        return this.props.startDate !== null
+            && this.props.endDate !== null
+            && this.props.returnDate !== null
+            && this.props.details.length > 0
+            && Number(this.props.daysOut) > 0
+            && Number(this.props.daysUsed) > 0;
+    }
+
     render() {
         let startDatePicker = null;
         let endDatePicker = null;
         let returnDatePicker = null;
+        let managerCommentsTextarea = null;
 
         if (!this.props.timeOffRequest
             || !this.props.timeOffRequest.start_date
@@ -76,6 +92,21 @@ class TimeOffRequestFormComponent extends Component {
             );
         }
 
+        if (this.props.timeOffRequest && this.props.timeOffRequest.status === 'approved') {
+            managerCommentsTextarea = (
+                <FormRow>
+                    <Label>Manager Comments</Label>
+                    <Container>
+                        <Textarea
+                            editable={this.props.editable}
+                            value={this.props.managerComments}
+                            onChangeText={this.props.changeManagerCommentsText}
+                        />
+                    </Container>
+                </FormRow>
+            );
+        }
+
         return (
             <Form>
                 <FormRow>
@@ -110,7 +141,7 @@ class TimeOffRequestFormComponent extends Component {
                         <Textbox
                             editable={this.props.editable}
                             value={String(this.props.daysOut)}
-                            onChangeText={this.props.changeDaysOutValue}
+                            onChangeText={text => this.props.changeDaysOutValue(Number(text))}
                         />
                     </Container>
                 </FormRow>
@@ -121,21 +152,12 @@ class TimeOffRequestFormComponent extends Component {
                         <Textbox
                             editable={this.props.editable}
                             value={String(this.props.daysUsed)}
-                            onChangeText={this.props.changeDaysUsedValue}
+                            onChangeText={text => this.props.changeDaysUsedValue(Number(text))}
                         />
                     </Container>
                 </FormRow>
 
-                <FormRow>
-                    <Label>Manager Comments</Label>
-                    <Container>
-                        <Textarea
-                            editable={this.props.editable}
-                            value={this.props.managerComments}
-                            onChangeText={this.props.changeManagerCommentsText}
-                        />
-                    </Container>
-                </FormRow>
+                {managerCommentsTextarea}
             </Form>
         );
     }
@@ -161,6 +183,7 @@ TimeOffRequestFormComponent.propTypes = {
     changeManagerCommentsText: PropTypes.func,
     changeReturnDateValue: PropTypes.func,
     changeStartDateValue: PropTypes.func,
+    onFormChange: PropTypes.func,
     loadTimeOffRequestModel: PropTypes.func,
 };
 
