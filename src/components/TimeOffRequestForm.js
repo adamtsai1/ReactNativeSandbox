@@ -4,7 +4,9 @@ import { connect } from 'react-redux';
 
 // App
 import {
+    changeDetailsText,
     changeEndDateValue,
+    changeReturnDateValue,
     changeStartDateValue,
 } from '../actions/timeOffFormActions';
 
@@ -37,13 +39,13 @@ class TimeOffRequestFormComponent extends Component {
 
                 <FormRow>
                     <Label>Return Date</Label>
-                    <DatePicker />
+                    <DatePicker onDateChange={this.props.changeReturnDateValue} />
                 </FormRow>
 
                 <FormRow>
                     <Label>Details</Label>
                     <Container>
-                        <Textarea />
+                        <Textarea onChangeText={this.props.changeDetailsText} />
                     </Container>
                 </FormRow>
                 
@@ -77,7 +79,9 @@ TimeOffRequestFormComponent.propTypes = {
     timeOffRequest: PropTypes.object,
 
     // Functions
+    changeDetailsText: PropTypes.func,
     changeEndDateValue: PropTypes.func,
+    changeReturnDateValue: PropTypes.func,
     changeStartDateValue: PropTypes.func,
 };
 
@@ -85,6 +89,8 @@ const styles = {
 };
 
 export const TimeOffRequestForm = connect(null, {
+    changeDetailsText,
     changeEndDateValue,
+    changeReturnDateValue,
     changeStartDateValue,
 })(TimeOffRequestFormComponent);
