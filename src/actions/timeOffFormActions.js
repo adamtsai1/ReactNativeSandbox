@@ -6,6 +6,7 @@ import {
     MANAGER_COMMENTS_CHANGE,
     RETURN_DATE_CHANGE,
     START_DATE_CHANGE,
+    TIME_OFF_REQUEST_MODEL_LOAD,
 } from './timeOffFormActionTypes';
 
 export const changeDaysOutValue = (daysOut) => ({
@@ -41,4 +42,9 @@ export const changeReturnDateValue = (returnDate) => ({
 export const changeStartDateValue = (startDate) => ({
     type: START_DATE_CHANGE,
     payload: startDate,
+});
+
+export const loadTimeOffRequestModel = (timeOffRequest) => ({
+    type: TIME_OFF_REQUEST_MODEL_LOAD,
+    payload: timeOffRequest,
 });

@@ -7,6 +7,7 @@ import {
     MANAGER_COMMENTS_CHANGE,
     RETURN_DATE_CHANGE,
     START_DATE_CHANGE,
+    TIME_OFF_REQUEST_MODEL_LOAD,
 } from '../actions/timeOffFormActionTypes';
 
 const INITIAL_STATE = {
@@ -24,6 +25,9 @@ const daysOut = (state = INITIAL_STATE.daysOut, action) => {
         case DAYS_OUT_CHANGE:
             return action.payload;
 
+        case TIME_OFF_REQUEST_MODEL_LOAD:
+            return action.payload.days_out;
+
         default:
             return state;
     }
@@ -33,6 +37,9 @@ const daysUsed = (state = INITIAL_STATE.daysUsed, action) => {
     switch (action.type) {
         case DAYS_USED_CHANGE:
             return action.payload;
+
+        case TIME_OFF_REQUEST_MODEL_LOAD:
+            return action.payload.days_used;
 
         default:
             return state;
@@ -44,6 +51,9 @@ const details = (state = INITIAL_STATE.details, action) => {
         case DETAILS_CHANGE:
             return action.payload;
 
+        case TIME_OFF_REQUEST_MODEL_LOAD:
+            return action.payload.details;
+
         default:
             return state;
     }
@@ -53,6 +63,9 @@ const endDate = (state = INITIAL_STATE.endDate, action) => {
     switch (action.type) {
         case END_DATE_CHANGE:
             return action.payload;
+
+        case TIME_OFF_REQUEST_MODEL_LOAD:
+            return action.payload.end_date;
 
         default:
             return state;
@@ -64,6 +77,9 @@ const managerComments = (state = INITIAL_STATE.managerComments, action) => {
         case MANAGER_COMMENTS_CHANGE:
             return action.payload;
 
+        case TIME_OFF_REQUEST_MODEL_LOAD:
+            return action.payload.manager_comments;
+
         default:
             return state;
     }
@@ -74,6 +90,9 @@ const returnDate = (state = INITIAL_STATE.returnDate, action) => {
         case RETURN_DATE_CHANGE:
             return action.payload;
 
+        case TIME_OFF_REQUEST_MODEL_LOAD:
+            return action.payload.return_date;
+
         default:
             return state;
     }
@@ -83,6 +102,9 @@ const startDate = (state = INITIAL_STATE.startDate, action) => {
     switch (action.type) {
         case START_DATE_CHANGE:
             return action.payload;
+
+        case TIME_OFF_REQUEST_MODEL_LOAD:
+            return action.payload.start_date;
 
         default:
             return state;

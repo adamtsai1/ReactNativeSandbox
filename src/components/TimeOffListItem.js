@@ -42,7 +42,7 @@ export const TimeOffListItem = ({ item, style, onPress }) => {
             <Text>
                 {startDateText} - {endDateText}
                 {'\n'}
-                {item.total_days} {dayLabel} - {item.total_hours} {hourLabel}
+                {item.days_out} {dayLabel} - {item.days_out * 24} {hourLabel}
             </Text>
         </TouchableOpacity>
     );

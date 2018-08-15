@@ -12,6 +12,7 @@ export class Textbox extends Component {
 
         return (
             <TextInput
+                {...this.props}
                 ref={(input) => { this.textInput = input; }}
                 secureTextEntry={this.props.secureTextEntry}
                 style={textboxStyles}
