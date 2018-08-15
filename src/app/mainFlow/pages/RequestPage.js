@@ -1,23 +1,43 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Text } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { connect } from 'react-redux';
 
 // Components
-import { Page } from '../../../components';
+import { resetTimeOffRequestModel } from '../../../actions/timeOffFormActions';
+import { Page, TimeOffRequestForm } from '../../../components';
 
 class RequestPageComponent extends Component {
+    componentWillMount() {
+        this.props.resetTimeOffRequestModel();
+    }
+
     render() {
+        const { contentContainerStyle } = styles;
+
         return (
-            <Page title="Request Time Off" navigate={this.props.navigation.navigate} style={{ borderWidth: 1, borderColor: 'red' }}>
-                <Text>Request Time Off</Text>
-            </Page>
+            <ScrollView>
+                <Page title="Request Time Off">
+                    <View style={contentContainerStyle}>
+                        <TimeOffRequestForm editable />
+                    </View>
+                </Page>
+            </ScrollView>
         );
     }
 }
 
 RequestPageComponent.propTypes = {
-    navigation: PropTypes.object,
+    resetTimeOffRequestModel: PropTypes.func,
 };
 
-export const RequestPage = connect(null, null)(RequestPageComponent);
+const styles = {
+    contentContainerStyle: {
+        paddingBottom: 10,
+        paddingLeft: 10,
+        paddingRight: 10,
+        paddingTop: 18,
+    },
+};
+
+export const RequestPage = connect(null, { resetTimeOffRequestModel })(RequestPageComponent);

@@ -37,7 +37,10 @@ class TimeOffRequestFormComponent extends Component {
         let endDatePicker = null;
         let returnDatePicker = null;
 
-        if (!this.props.timeOffRequest.start_date || (this.props.timeOffRequest.start_date && this.props.startDate)) {
+        if (!this.props.timeOffRequest
+            || !this.props.timeOffRequest.start_date
+            || (this.props.timeOffRequest.start_date && this.props.startDate)) {
+
             startDatePicker = (
                 <DatePicker
                     defaultDate={this.props.startDate}
@@ -47,7 +50,10 @@ class TimeOffRequestFormComponent extends Component {
             );
         }
 
-        if (!this.props.timeOffRequest.end_date || (this.props.timeOffRequest.end_date && this.props.endDate)) {
+        if (!this.props.timeOffRequest
+            || !this.props.timeOffRequest.end_date
+            || (this.props.timeOffRequest.end_date && this.props.endDate)) {
+
             endDatePicker = (
                 <DatePicker
                     defaultDate={this.props.endDate}
@@ -57,7 +63,10 @@ class TimeOffRequestFormComponent extends Component {
             );
         }
 
-        if (!this.props.timeOffRequest.return_date || (this.props.timeOffRequest.return_date && this.props.returnDate)) {
+        if (!this.props.timeOffRequest
+            || !this.props.timeOffRequest.return_date
+            || (this.props.timeOffRequest.return_date && this.props.returnDate)) {
+
             returnDatePicker = (
                 <DatePicker
                     defaultDate={this.props.returnDate}

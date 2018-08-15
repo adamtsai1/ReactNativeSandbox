@@ -7,6 +7,7 @@ import {
     RETURN_DATE_CHANGE,
     START_DATE_CHANGE,
     TIME_OFF_REQUEST_MODEL_LOAD,
+    TIME_OFF_REQUEST_MODEL_RESET,
 } from './timeOffFormActionTypes';
 
 export const changeDaysOutValue = (daysOut) => ({
@@ -47,4 +48,8 @@ export const changeStartDateValue = (startDate) => ({
 export const loadTimeOffRequestModel = (timeOffRequest) => ({
     type: TIME_OFF_REQUEST_MODEL_LOAD,
     payload: timeOffRequest,
+});
+
+export const resetTimeOffRequestModel = () => ({
+    type: TIME_OFF_REQUEST_MODEL_RESET,
 });
