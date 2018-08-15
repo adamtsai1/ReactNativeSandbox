@@ -12,6 +12,7 @@ export const fetchTimeOffRequests = (userId, type) => {
                     total_hours: 24,
                     status: 'pending',
                     details: 'Going out of town',
+                    managerComments: '',
                 }, {
                     id: 2,
                     start_date: '2018-12-20',
@@ -20,6 +21,7 @@ export const fetchTimeOffRequests = (userId, type) => {
                     total_hours: 8,
                     status: 'pending',
                     details: 'Doctor appointment',
+                    managerComments: '',
                 }],
             };
         } else if (type === 'upcoming') {
@@ -32,6 +34,7 @@ export const fetchTimeOffRequests = (userId, type) => {
                     total_hours: 16,
                     status: 'approved',
                     details: 'Vacation',
+                    managerComments: 'Approved',
                 }, {
                     id: 4,
                     start_date: '2018-10-10',
@@ -40,6 +43,7 @@ export const fetchTimeOffRequests = (userId, type) => {
                     total_hours: 8,
                     status: 'approved',
                     details: 'Moving',
+                    managerComments: 'Have fun',
                 }],
             };
         }

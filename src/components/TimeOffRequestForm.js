@@ -4,8 +4,11 @@ import { connect } from 'react-redux';
 
 // App
 import {
+    changeDaysOutValue,
+    changeDaysUsedValue,
     changeDetailsText,
     changeEndDateValue,
+    changeManagerCommentsText,
     changeReturnDateValue,
     changeStartDateValue,
 } from '../actions/timeOffFormActions';
@@ -52,21 +55,21 @@ class TimeOffRequestFormComponent extends Component {
                 <FormRow>
                     <Label>Number of Days Out</Label>
                     <Container>
-                        <Textarea />
+                        <Textbox onChangeText={this.props.changeDaysOutValue} />
                     </Container>
                 </FormRow>
 
                 <FormRow>
                     <Label>Number of Days Used</Label>
                     <Container>
-                        <Textbox />
+                        <Textbox onChangeText={this.props.changeDaysUsedValue} />
                     </Container>
                 </FormRow>
 
                 <FormRow>
                     <Label>Manager Comments</Label>
                     <Container>
-                        <Textarea />
+                        <Textarea onChangeText={this.props.changeManagerCommentsText} />
                     </Container>
                 </FormRow>
             </Form>
@@ -79,8 +82,11 @@ TimeOffRequestFormComponent.propTypes = {
     timeOffRequest: PropTypes.object,
 
     // Functions
+    changeDaysOutValue: PropTypes.func,
+    changeDaysUsedValue: PropTypes.func,
     changeDetailsText: PropTypes.func,
     changeEndDateValue: PropTypes.func,
+    changeManagerCommentsText: PropTypes.func,
     changeReturnDateValue: PropTypes.func,
     changeStartDateValue: PropTypes.func,
 };
@@ -89,8 +95,11 @@ const styles = {
 };
 
 export const TimeOffRequestForm = connect(null, {
+    changeDaysOutValue,
+    changeDaysUsedValue,
     changeDetailsText,
     changeEndDateValue,
+    changeManagerCommentsText,
     changeReturnDateValue,
     changeStartDateValue,
 })(TimeOffRequestFormComponent);

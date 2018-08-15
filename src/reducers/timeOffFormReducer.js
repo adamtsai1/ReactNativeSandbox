@@ -1,16 +1,42 @@
 import { combineReducers } from 'redux';
 import {
+    DAYS_OUT_CHANGE,
+    DAYS_USED_CHANGE,
     DETAILS_CHANGE,
     END_DATE_CHANGE,
+    MANAGER_COMMENTS_CHANGE,
     RETURN_DATE_CHANGE,
     START_DATE_CHANGE,
 } from '../actions/timeOffFormActionTypes';
 
 const INITIAL_STATE = {
+    daysOut: 0,
+    daysUsed: 0,
     details: '',
     endDate: null,
+    managerComments: '',
     returnDate: null,
     startDate: null,
+};
+
+const daysOut = (state = INITIAL_STATE.daysOut, action) => {
+    switch (action.type) {
+        case DAYS_OUT_CHANGE:
+            return action.payload;
+
+        default:
+            return state;
+    }
+};
+
+const daysUsed = (state = INITIAL_STATE.daysUsed, action) => {
+    switch (action.type) {
+        case DAYS_USED_CHANGE:
+            return action.payload;
+
+        default:
+            return state;
+    }
 };
 
 const details = (state = INITIAL_STATE.details, action) => {
@@ -26,6 +52,16 @@ const details = (state = INITIAL_STATE.details, action) => {
 const endDate = (state = INITIAL_STATE.endDate, action) => {
     switch (action.type) {
         case END_DATE_CHANGE:
+            return action.payload;
+
+        default:
+            return state;
+    }
+};
+
+const managerComments = (state = INITIAL_STATE.managerComments, action) => {
+    switch (action.type) {
+        case MANAGER_COMMENTS_CHANGE:
             return action.payload;
 
         default:
@@ -54,8 +90,11 @@ const startDate = (state = INITIAL_STATE.startDate, action) => {
 };
 
 export default combineReducers({
+    daysOut,
+    daysUsed,
     details,
     endDate,
+    managerComments,
     returnDate,
     startDate,
 });
