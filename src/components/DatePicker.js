@@ -2,13 +2,20 @@ import { DatePicker } from 'native-base';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { View } from 'react-native';
+import { Colors } from '../utility';
 
 export default class DatePickerComponent extends Component {
     render() {
         const { containerStyle, datepickerPlaceholderTextStyle, datepickerTextStyle } = styles;
+        const containerStyleUpdated = { ...containerStyle };
 
+
+        if (this.props.disabled) {
+            containerStyleUpdated.backgroundColor = Colors.lightestGray;
+        }
+        
         return (
-            <View style={containerStyle}>
+            <View style={containerStyleUpdated}>
                 <DatePicker
                     {...this.props}
                     placeHolderTextStyle={datepickerPlaceholderTextStyle}
@@ -22,6 +29,7 @@ export default class DatePickerComponent extends Component {
 }
 
 DatePickerComponent.propTypes = {
+    disabled: PropTypes.bool,
     onDateChange: PropTypes.func,
 };
 

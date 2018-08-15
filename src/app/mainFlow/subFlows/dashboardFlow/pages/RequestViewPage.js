@@ -9,7 +9,10 @@ export const RequestViewPage = ({ navigation }) => {
 
     return (
         <ScrollView style={containerStyle}>
-            <TimeOffRequestForm timeOffRequest={timeOffRequest} />
+            <TimeOffRequestForm
+                editable={false}
+                timeOffRequest={timeOffRequest}
+            />
         </ScrollView>
     );
 };
