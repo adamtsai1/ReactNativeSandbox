@@ -45,6 +45,12 @@ export const changeStartDateValue = (startDate) => ({
     payload: startDate,
 });
 
+export const createTimeOffRequestRecord = (timeOffRequest) => (dispatch) => {
+    
+    // dispatch()
+    // TIME_OFF_REQUEST_RECORD_CREATE
+};
+
 export const loadTimeOffRequestModel = (timeOffRequest) => ({
     type: TIME_OFF_REQUEST_MODEL_LOAD,
     payload: timeOffRequest,

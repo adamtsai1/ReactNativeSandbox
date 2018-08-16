@@ -21,7 +21,7 @@ export const fetchPendingRequests = (userId) => (dispatch) => {
 export const fetchUpcomingRequests = (userId) => (dispatch) => {
     dispatch({ type: UPCOMING_TIME_OFF_REQUESTS_REQUEST });
 
-    return fetchTimeOffRequests(userId, 'upcoming')
+    return fetchTimeOffRequests(userId, 'approved')
         .then(response => {
             dispatch({
                 type: UPCOMING_TIME_OFF_REQUESTS_RECEIVED,

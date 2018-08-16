@@ -12,6 +12,7 @@ import {
     changeManagerCommentsText,
     changeReturnDateValue,
     changeStartDateValue,
+    createTimeOffRequestRecord,
     loadTimeOffRequestModel,
     resetTimeOffRequestModel,
 } from '../actions/timeOffFormActions';
@@ -28,9 +29,12 @@ import {
 } from '../components';
 
 class TimeOffRequestFormComponent extends Component {
-    componentWillMount() {
-        // debugger
+    constructor() {
+        super();
+        this.saveTimeOffRequest = this.saveTimeOffRequest.bind(this);
+    }
 
+    componentWillMount() {
         if (this.props.timeOffRequest) {
             this.props.loadTimeOffRequestModel(this.props.timeOffRequest);
         } else {
@@ -55,6 +59,10 @@ class TimeOffRequestFormComponent extends Component {
         }
     }
 
+    getTimeOffRequestModel() {
+
+    }
+
     isFormValid() {
         return this.props.startDate !== null
             && this.props.endDate !== null
@@ -62,6 +70,14 @@ class TimeOffRequestFormComponent extends Component {
             && this.props.details.length > 0
             && Number(this.props.daysOut) > 0
             && Number(this.props.daysUsed) > 0;
+    }
+
+    saveTimeOffRequest() {
+        if (this.props.id > 0) {
+            
+        } else {
+            this.props.createTimeOffRequestRecord();
+        }
     }
 
     render() {
@@ -85,7 +101,11 @@ class TimeOffRequestFormComponent extends Component {
 
         const status = this.props.timeOffRequest ? (this.props.timeOffRequest.status || '') : '';
         if (status !== 'pending' && status !== 'approved') {
-            submitButton = <Button disabled={!this.isFormValid()}>Submit</Button>;
+            submitButton = (
+                <Button disabled={!this.isFormValid()} onPress={this.saveTimeOffRequest}>
+                    Submit
+                </Button>
+            );
         }
 
         return (
@@ -167,6 +187,7 @@ TimeOffRequestFormComponent.propTypes = {
     details: PropTypes.string,
     editable: PropTypes.bool,
     endDate: PropTypes.instanceOf(Date),
+    id: PropTypes.number,
     managerComments: PropTypes.string,
     returnDate: PropTypes.instanceOf(Date),
     startDate: PropTypes.instanceOf(Date),
@@ -180,6 +201,7 @@ TimeOffRequestFormComponent.propTypes = {
     changeManagerCommentsText: PropTypes.func,
     changeReturnDateValue: PropTypes.func,
     changeStartDateValue: PropTypes.func,
+    createTimeOffRequestRecord: PropTypes.func,
     loadTimeOffRequestModel: PropTypes.func,
     resetTimeOffRequestModel: PropTypes.func,
 };
@@ -189,6 +211,7 @@ const mapStateToProps = (state) => ({
     daysUsed: state.timeOffForm.daysUsed,
     details: state.timeOffForm.details,
     endDate: state.timeOffForm.endDate,
+    id: state.timeOffForm.id,
     managerComments: state.timeOffForm.managerComments,
     returnDate: state.timeOffForm.returnDate,
     startDate: state.timeOffForm.startDate,
@@ -202,6 +225,7 @@ export const TimeOffRequestForm = connect(mapStateToProps, {
     changeManagerCommentsText,
     changeReturnDateValue,
     changeStartDateValue,
+    createTimeOffRequestRecord,
     loadTimeOffRequestModel,
     resetTimeOffRequestModel,
 })(TimeOffRequestFormComponent);

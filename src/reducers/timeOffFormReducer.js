@@ -16,6 +16,7 @@ const INITIAL_STATE = {
     daysUsed: 0,
     details: '',
     endDate: null,
+    id: 0,
     managerComments: '',
     returnDate: null,
     startDate: null,
@@ -85,6 +86,16 @@ const endDate = (state = INITIAL_STATE.endDate, action) => {
     }
 };
 
+const id = (state = INITIAL_STATE.id, action) => {
+    switch (action.type) {
+        case TIME_OFF_REQUEST_MODEL_LOAD:
+            return action.payload.id;
+
+        default:
+            return state;
+    }
+};
+
 const managerComments = (state = INITIAL_STATE.managerComments, action) => {
     switch (action.type) {
         case MANAGER_COMMENTS_CHANGE:
@@ -138,6 +149,7 @@ export default combineReducers({
     daysUsed,
     details,
     endDate,
+    id,
     managerComments,
     returnDate,
     startDate,

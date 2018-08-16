@@ -7,4 +7,5 @@ export const RETURN_DATE_CHANGE = 'return_date_change';
 export const START_DATE_CHANGE = 'start_date_change';
 export const TIME_OFF_REQUEST_MODEL_LOAD = 'time_off_request_model_load';
 export const TIME_OFF_REQUEST_MODEL_RESET = 'time_off_request_model_reset';
-
+export const TIME_OFF_REQUEST_RECORD_CREATE = 'time_off_request_record_create';
+export const TIME_OFF_REQUEST_RECORD_UPDATE = 'time_off_request_record_update';
