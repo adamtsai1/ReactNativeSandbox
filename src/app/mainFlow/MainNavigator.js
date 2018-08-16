@@ -1,6 +1,6 @@
 // Dependencies
 import React from 'react';
-import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
+import { createBottomTabNavigator, createStackNavigator, NavigationActions } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 // Components
@@ -21,6 +21,14 @@ const tabNavigatorRoutes = {
         navigationOptions: {
             tabBarIcon: (props) => <Icon name="tachometer" size={28} color={props.tintColor} />,
             tabBarLabel: 'Dashboard',
+            tabBarOnPress: (eventArgs) => {
+                eventArgs.navigation.dispatch(
+                    NavigationActions.navigate({
+                        routeName: 'dashboard',
+                        action: NavigationActions.navigate({ routeName: 'overview' }),
+                    }),
+                );
+            },
         },
     },
     request: {
