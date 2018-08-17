@@ -1,9 +1,9 @@
 {
     "data": [{
         "id": 1,
-        "start_date": "2018-11-01T04:00:00.000Z",
-        "end_date": "2018-11-03T04:00:00.000Z",
-        "return_date": "2018-11-04T04:00:00.000Z",
+        "start_date": "2018-11-01",
+        "end_date": "2018-11-03",
+        "return_date": "2018-11-04",
         "days_out": 3,
         "days_used": 3,
         "status": "pending",
@@ -11,9 +11,9 @@
         "manager_comments": ""
     }, {
         "id": 2,
-        "start_date": "2018-11-20T04:00:00.000Z",
-        "end_date": "2018-11-20T04:00:00.000Z",
-        "return_date": "2018-11-21T04:00:00.000Z",
+        "start_date": "2018-11-20",
+        "end_date": "2018-11-20",
+        "return_date": "2018-11-21",
         "days_out": 1,
         "days_used": 1,
         "status": "pending",
@@ -21,9 +21,9 @@
         "manager_comments": ""
     }, {
         "id": 3,
-        "start_date": "2018-9-18T04:00:00.000Z",
-        "end_date": "2018-9-19T04:00:00.000Z",
-        "return_date": "2018-9-20T04:00:00.000Z",
+        "start_date": "2018-9-18",
+        "end_date": "2018-9-19",
+        "return_date": "2018-9-20",
         "days_out": 2,
         "days_used": 2,
         "status": "approved",
@@ -31,9 +31,9 @@
         "manager_comments": "Approved"
     }, {
         "id": 4,
-        "start_date": "2018-10-10T04:00:00.000Z",
-        "end_date": "2018-10-10T04:00:00.000Z",
-        "return_date": "2018-10-11T04:00:00.000Z",
+        "start_date": "2018-10-10",
+        "end_date": "2018-10-10",
+        "return_date": "2018-10-11",
         "days_out": 1,
         "days_used": 1,
         "status": "approved",

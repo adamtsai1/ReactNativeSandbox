@@ -12,9 +12,10 @@ import {
     changeManagerCommentsText,
     changeReturnDateValue,
     changeStartDateValue,
-    createTimeOffRequestRecord,
+    createTimeOffRequest,
     loadTimeOffRequestModel,
     resetTimeOffRequestModel,
+    updateTimeOffRequest,
 } from '../actions/timeOffFormActions';
 
 import {
@@ -31,6 +32,7 @@ import {
 class TimeOffRequestFormComponent extends Component {
     constructor() {
         super();
+        this.getTimeOffRequestModel = this.getTimeOffRequestModel.bind(this);
         this.saveTimeOffRequest = this.saveTimeOffRequest.bind(this);
     }
 
@@ -60,7 +62,15 @@ class TimeOffRequestFormComponent extends Component {
     }
 
     getTimeOffRequestModel() {
-
+        return {
+            start_date: this.props.startDate,
+            end_date: this.props.endDate,
+            return_date: this.props.returnDate,
+            days_out: Number(this.props.daysOut),
+            days_used: Number(this.props.daysUsed),
+            details: this.props.details,
+            manager_comments: this.props.managerComments,
+        };
     }
 
     isFormValid() {
@@ -73,10 +83,13 @@ class TimeOffRequestFormComponent extends Component {
     }
 
     saveTimeOffRequest() {
+        const timeOffRequest = this.getTimeOffRequestModel();
+
         if (this.props.id > 0) {
-            
+            this.props.updateTimeOffRequest(timeOffRequest);
         } else {
-            this.props.createTimeOffRequestRecord();
+            timeOffRequest.status = 'pending';
+            this.props.createTimeOffRequest(timeOffRequest);
         }
     }
 
@@ -201,9 +214,10 @@ TimeOffRequestFormComponent.propTypes = {
     changeManagerCommentsText: PropTypes.func,
     changeReturnDateValue: PropTypes.func,
     changeStartDateValue: PropTypes.func,
-    createTimeOffRequestRecord: PropTypes.func,
+    createTimeOffRequest: PropTypes.func,
     loadTimeOffRequestModel: PropTypes.func,
     resetTimeOffRequestModel: PropTypes.func,
+    updateTimeOffRequest: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
@@ -225,7 +239,8 @@ export const TimeOffRequestForm = connect(mapStateToProps, {
     changeManagerCommentsText,
     changeReturnDateValue,
     changeStartDateValue,
-    createTimeOffRequestRecord,
+    createTimeOffRequest,
     loadTimeOffRequestModel,
     resetTimeOffRequestModel,
+    updateTimeOffRequest,
 })(TimeOffRequestFormComponent);

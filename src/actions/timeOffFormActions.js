@@ -1,3 +1,4 @@
+import { API_REQUEST, API_SUCCESS } from './appActionTypes';
 import {
     DAYS_OUT_CHANGE,
     DAYS_USED_CHANGE,
@@ -6,9 +7,12 @@ import {
     MANAGER_COMMENTS_CHANGE,
     RETURN_DATE_CHANGE,
     START_DATE_CHANGE,
+    TIME_OFF_REQUEST_CREATE,
     TIME_OFF_REQUEST_MODEL_LOAD,
     TIME_OFF_REQUEST_MODEL_RESET,
 } from './timeOffFormActionTypes';
+
+import * as timeOffRequestService from '../api/timeOffRequest';
 
 export const changeDaysOutValue = (daysOut) => ({
     type: DAYS_OUT_CHANGE,
@@ -45,10 +49,16 @@ export const changeStartDateValue = (startDate) => ({
     payload: startDate,
 });
 
-export const createTimeOffRequestRecord = (timeOffRequest) => (dispatch) => {
-    
-    // dispatch()
-    // TIME_OFF_REQUEST_RECORD_CREATE
+export const createTimeOffRequest = (timeOffRequest) => (dispatch) => {
+    dispatch({ type: API_REQUEST });
+    timeOffRequestService.createTimeOffRequest(timeOffRequest)
+        .then(response => {
+            dispatch({ type: API_SUCCESS });
+            dispatch({
+                type: TIME_OFF_REQUEST_CREATE,
+                payload: response.data,
+            });
+        });
 };
 
 export const loadTimeOffRequestModel = (timeOffRequest) => ({
@@ -59,3 +69,7 @@ export const loadTimeOffRequestModel = (timeOffRequest) => ({
 export const resetTimeOffRequestModel = () => ({
     type: TIME_OFF_REQUEST_MODEL_RESET,
 });
+
+export const updateTimeOffRequest = (timeOffRequest) => (dispatch) => {
+
+};

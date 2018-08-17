@@ -9,8 +9,8 @@ export const TimeOffListItem = ({ item, style, onPress }) => {
     const { containerStyle, iconStyle } = styles;
     let icon;
     let color;
-    const startDateText = moment(item.start_date, 'YYYY-MM-DD').format('MMMM d YYYY');
-    const endDateText = moment(item.end_date, 'YYYY-MM-DD').format('MMMM d YYYY');
+    const startDateText = moment(item.start_date).utc().format('MMMM D YYYY');
+    const endDateText = moment(item.end_date).utc().format('MMMM D YYYY');
     const dayLabel = item.total_days === 1 ? 'day' : 'days';
     const hourLabel = item.total_hours === 1 ? 'hour' : 'hours';
 

@@ -6,6 +6,8 @@ import {
     UPCOMING_TIME_OFF_REQUESTS_REQUEST,
 } from '../actions/timeOffActionTypes';
 
+import { TIME_OFF_REQUEST_CREATE } from '../actions/timeOffFormActionTypes';
+
 const INITIAL_STATE = {
     pendingRequests: [],
     pendingRequestsLoading: false,
@@ -17,6 +19,18 @@ const pendingRequests = (state = INITIAL_STATE.pendingRequests, action) => {
     switch (action.type) {
         case PENDING_TIME_OFF_REQUESTS_RECEIVED:
             return action.payload;
+
+        case TIME_OFF_REQUEST_CREATE:
+            debugger
+
+            if (action.payload.status === 'pending') {
+                let test = [...state, action.payload];
+
+                debugger
+                return [...state, action.payload];
+            }
+
+            return state;
 
         default:
             return state;
@@ -38,6 +52,13 @@ const pendingRequestsLoading = (state = INITIAL_STATE.pendingRequestsLoading, ac
 
 const upcomingRequests = (state = INITIAL_STATE.upcomingRequests, action) => {
     switch (action.type) {
+        case TIME_OFF_REQUEST_CREATE:
+            if (action.payload.type === 'approved') {
+                return [...state, action.payload];
+            }
+
+            return state;
+
         case UPCOMING_TIME_OFF_REQUESTS_RECEIVED:
             return action.payload;
 
