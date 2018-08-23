@@ -5,14 +5,23 @@ import { ScrollView, View } from 'react-native';
 // Components
 import { Page, TimeOffRequestForm } from '../../../components';
 
-export const RequestPage = () => {
+export const RequestPage = ({ navigation }) => {
     const { contentContainerStyle } = styles;
-
     return (
         <ScrollView>
             <Page title="Request Time Off">
                 <View style={contentContainerStyle}>
-                    <TimeOffRequestForm editable />
+                    <TimeOffRequestForm
+                        editable
+                        onTimeOffRequestSaved={() => {
+                            navigation.navigate({
+                                routeName: 'dashboard',
+                                params: {
+                                    toast: 'Time off request submitted successfully.',
+                                },
+                            });
+                        }}
+                    />
                 </View>
             </Page>
         </ScrollView>
@@ -20,6 +29,7 @@ export const RequestPage = () => {
 };
 
 RequestPage.propTypes = {
+    navigation: PropTypes.object,
     resetTimeOffRequestModel: PropTypes.func,
 };
 

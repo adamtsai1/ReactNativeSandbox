@@ -51,7 +51,7 @@ export const changeStartDateValue = (startDate) => ({
 
 export const createTimeOffRequest = (timeOffRequest) => (dispatch) => {
     dispatch({ type: API_REQUEST });
-    timeOffRequestService.createTimeOffRequest(timeOffRequest)
+    return timeOffRequestService.createTimeOffRequest(timeOffRequest)
         .then(response => {
             dispatch({ type: API_SUCCESS });
             dispatch({

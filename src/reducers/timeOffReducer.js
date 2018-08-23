@@ -21,12 +21,7 @@ const pendingRequests = (state = INITIAL_STATE.pendingRequests, action) => {
             return action.payload;
 
         case TIME_OFF_REQUEST_CREATE:
-            debugger
-
             if (action.payload.status === 'pending') {
-                let test = [...state, action.payload];
-
-                debugger
                 return [...state, action.payload];
             }
 

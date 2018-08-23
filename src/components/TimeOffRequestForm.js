@@ -83,14 +83,20 @@ class TimeOffRequestFormComponent extends Component {
     }
 
     saveTimeOffRequest() {
+        const self = this;
         const timeOffRequest = this.getTimeOffRequestModel();
+        let apiCall;
 
         if (this.props.id > 0) {
-            this.props.updateTimeOffRequest(timeOffRequest);
+            apiCall = this.props.updateTimeOffRequest(timeOffRequest);
         } else {
             timeOffRequest.status = 'pending';
-            this.props.createTimeOffRequest(timeOffRequest);
+            apiCall = this.props.createTimeOffRequest(timeOffRequest);
         }
+
+        apiCall.then(response => {
+            this.props.onTimeOffRequestSaved(response);
+        });
     }
 
     render() {
@@ -216,6 +222,7 @@ TimeOffRequestFormComponent.propTypes = {
     changeStartDateValue: PropTypes.func,
     createTimeOffRequest: PropTypes.func,
     loadTimeOffRequestModel: PropTypes.func,
+    onTimeOffRequestSaved: PropTypes.func,
     resetTimeOffRequestModel: PropTypes.func,
     updateTimeOffRequest: PropTypes.func,
 };

@@ -1,3 +1,4 @@
+import { Root, Toast } from 'native-base';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { View } from 'react-native';
@@ -18,6 +19,19 @@ class OverviewPageComponent extends Component {
         this.props.fetchPendingRequests(1);
         this.props.fetchUpcomingRequests(1);
     }
+    
+    componentDidMount() {
+        this.props.navigation.addListener('didFocus', navigationArgs => {
+            const toast = navigationArgs.action.params ? navigationArgs.action.params.toast : null;
+
+            if (toast) {
+                Toast.show({
+                    text: toast,
+                    duration: 3000,
+                });
+            }
+        });
+    }
 
     viewTimeOffRequestDetail(timeOffRequest) {
         this.props.navigation.navigate('requestView', { timeOffRequest });
@@ -31,7 +45,7 @@ class OverviewPageComponent extends Component {
         } = styles;
 
         return (
-            <View>
+            <Root>
                 <View style={overviewContainerStyle}>
                     <CircleWithLabel
                         circleColor={Colors.white}
@@ -74,7 +88,7 @@ class OverviewPageComponent extends Component {
                         />
                     </View>
                 </View>
-            </View>
+            </Root>
         );
     }
 }
