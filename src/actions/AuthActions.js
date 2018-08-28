@@ -10,10 +10,8 @@ import {
     AUTH_TOKEN_RETRIEVED,
     LOGIN_ERROR,
     LOGIN_INIT,
-    LOGIN_PASSWORD_CHANGE,
     LOGIN_SUBMIT,
     LOGIN_SUCCESS,
-    LOGIN_USER_NAME_CHANGE,
     PASSWORD_RESET_EMAIL_CHANGE,
     PASSWORD_RESET_INIT,
     PASSWORD_RESET_SUBMIT,
@@ -25,16 +23,6 @@ import { login, resetPassword } from '../api/user';
 export const changePasswordResetEmail = (email) => ({
     type: PASSWORD_RESET_EMAIL_CHANGE,
     payload: email,
-});
-
-export const changePasswordText = (password) => ({
-    type: LOGIN_PASSWORD_CHANGE,
-    payload: password,
-});
-
-export const changeUserNameText = (userName) => ({
-    type: LOGIN_USER_NAME_CHANGE,
-    payload: userName,
 });
 
 export const initializeLogin = () => ({

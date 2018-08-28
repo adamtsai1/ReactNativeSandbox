@@ -140,8 +140,6 @@ LoginPageComponent.propTypes = {
     // Properties
     authToken: PropTypes.string,
     errorMessage: PropTypes.string,
-    password: PropTypes.string,
-    userName: PropTypes.string,
 
     // Actions
     submitLogin: PropTypes.func,
@@ -161,8 +159,6 @@ const styles = {
 const mapStateToProps = (state) => ({
     authToken: state.auth.authToken,
     errorMessage: state.auth.loginErrorMessage,
-    password: state.auth.loginPassword,
-    userName: state.auth.loginUserName,
 });
 
 export const LoginPage = connect(mapStateToProps, {

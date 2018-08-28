@@ -3,10 +3,8 @@ import {
     AUTH_TOKEN_RETRIEVED,
     LOGIN_ERROR,
     LOGIN_INIT,
-    LOGIN_PASSWORD_CHANGE,
     LOGIN_SUBMIT,
     LOGIN_SUCCESS,
-    LOGIN_USER_NAME_CHANGE,
     PASSWORD_RESET_EMAIL_CHANGE,
     PASSWORD_RESET_INIT,
     PASSWORD_RESET_SUCCESS,
@@ -48,32 +46,6 @@ const loginErrorMessage = (state = INITIAL_STATE.loginErrorMessage, action) => {
     }
 };
 
-const loginPassword = (state = INITIAL_STATE.loginPassword, action) => {
-    switch (action.type) {
-        case LOGIN_INIT:
-            return '';
-
-        case LOGIN_PASSWORD_CHANGE:
-            return action.payload;
-
-        default:
-            return state;
-    }
-};
-
-const loginUserName = (state = INITIAL_STATE.loginUserName, action) => {
-    switch (action.type) {
-        case LOGIN_INIT:
-            return '';
-
-        case LOGIN_USER_NAME_CHANGE:
-            return action.payload;
-
-        default:
-            return state;
-    }
-};
-
 const passwordResetEmail = (state = INITIAL_STATE.passwordResetEmail, action) => {
     switch (action.type) {
         case PASSWORD_RESET_EMAIL_CHANGE:
@@ -103,8 +75,6 @@ const passwordResetSuccess = (state = INITIAL_STATE.passwordResetSuccess, action
 const authReducer = combineReducers({
     authToken,
     loginErrorMessage,
-    loginPassword,
-    loginUserName,
     passwordResetEmail,
     passwordResetSuccess,
 });
