@@ -21,9 +21,9 @@
         "manager_comments": ""
     }, {
         "id": 3,
-        "start_date": "2018-9-18",
-        "end_date": "2018-9-19",
-        "return_date": "2018-9-20",
+        "start_date": "2018-5-18",
+        "end_date": "2018-5-19",
+        "return_date": "2018-5-20",
         "days_out": 2,
         "days_used": 2,
         "status": "approved",
@@ -31,9 +31,29 @@
         "manager_comments": "Approved"
     }, {
         "id": 4,
-        "start_date": "2018-10-10",
-        "end_date": "2018-10-10",
-        "return_date": "2018-10-11",
+        "start_date": "2018-7-10",
+        "end_date": "2018-7-10",
+        "return_date": "2018-7-11",
+        "days_out": 1,
+        "days_used": 1,
+        "status": "approved",
+        "details": "Moving",
+        "manager_comments": "Have fun"
+    }, {
+        "id": 5,
+        "start_date": "2018-11-18",
+        "end_date": "2018-11-19",
+        "return_date": "2018-11-20",
+        "days_out": 2,
+        "days_used": 2,
+        "status": "approved",
+        "details": "Vacation",
+        "manager_comments": "Approved"
+    }, {
+        "id": 6,
+        "start_date": "2018-12-10",
+        "end_date": "2018-12-10",
+        "return_date": "2018-12-11",
         "days_out": 1,
         "days_used": 1,
         "status": "approved",

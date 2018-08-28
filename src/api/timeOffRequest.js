@@ -23,7 +23,7 @@ export const fetchTimeOffRequests = (userId, type) => {
 
 const transform = (timeOffRequest) => ({
     ...timeOffRequest,
-    start_date: moment(timeOffRequest.start_date).utc().toDate(),
-    end_date: moment(timeOffRequest.end_date).utc().toDate(),
-    return_date: moment(timeOffRequest.return_date).utc().toDate(),
+    start_date: moment(timeOffRequest.start_date, 'YYYY-MM-DD').utc().toDate(),
+    end_date: moment(timeOffRequest.end_date, 'YYYY-MM-DD').utc().toDate(),
+    return_date: moment(timeOffRequest.return_date, 'YYYY-MM-DD').utc().toDate(),
 });

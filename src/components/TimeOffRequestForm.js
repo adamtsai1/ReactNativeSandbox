@@ -45,20 +45,7 @@ class TimeOffRequestFormComponent extends Component {
     }
 
     componentDidMount() {
-        const timeOffRequest = this.props.timeOffRequest;
-        if (timeOffRequest) {
-            if (timeOffRequest.start_date) {
-                this.startDatePicker.setDate(timeOffRequest.start_date);
-            }
 
-            if (timeOffRequest.end_date) {
-                this.endDatePicker.setDate(timeOffRequest.end_date);
-            }
-
-            if (timeOffRequest.return_date) {
-                this.returnDatePicker.setDate(timeOffRequest.return_date);
-            }
-        }
     }
 
     getTimeOffRequestModel() {
@@ -73,6 +60,28 @@ class TimeOffRequestFormComponent extends Component {
         };
     }
 
+    initializeDatePickers() {
+        const timeOffRequest = this.props.timeOffRequest;
+
+        if (timeOffRequest) {
+            if (timeOffRequest.start_date) {
+                this.startDatePicker.setDate(timeOffRequest.start_date);
+            }
+
+            if (timeOffRequest.end_date) {
+                this.endDatePicker.setDate(timeOffRequest.end_date);
+            }
+
+            if (timeOffRequest.return_date) {
+                this.returnDatePicker.setDate(timeOffRequest.return_date);
+            }
+        } else {
+            this.startDatePicker.clearDate();
+            this.endDatePicker.clearDate();
+            this.returnDatePicker.clearDate();
+        }
+    }
+
     isFormValid() {
         return this.props.startDate !== null
             && this.props.endDate !== null
@@ -83,7 +92,6 @@ class TimeOffRequestFormComponent extends Component {
     }
 
     saveTimeOffRequest() {
-        const self = this;
         const timeOffRequest = this.getTimeOffRequestModel();
         let apiCall;
 
@@ -200,6 +208,9 @@ class TimeOffRequestFormComponent extends Component {
 }
 
 TimeOffRequestFormComponent.propTypes = {
+    // Dependencies
+    navigation: PropTypes.object,
+
     // Properties
     daysOut: PropTypes.number,
     daysUsed: PropTypes.number,
@@ -250,4 +261,4 @@ export const TimeOffRequestForm = connect(mapStateToProps, {
     loadTimeOffRequestModel,
     resetTimeOffRequestModel,
     updateTimeOffRequest,
-})(TimeOffRequestFormComponent);
+}, null, { withRef: true })(TimeOffRequestFormComponent);

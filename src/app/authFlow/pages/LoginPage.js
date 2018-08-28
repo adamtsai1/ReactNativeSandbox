@@ -78,6 +78,7 @@ class LoginPageComponent extends Component {
                         <Label>User Name</Label>
                         <Container style={{ marginBottom: 16 }}>
                             <Textbox
+                                autoCapitalize="none"
                                 ref={(input) => { this.userNameInput = input; }}
                                 value={this.props.userName}
                                 onChangeText={this.onUserNameChanged}

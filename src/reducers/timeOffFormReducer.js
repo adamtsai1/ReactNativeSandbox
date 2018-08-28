@@ -128,7 +128,7 @@ const returnDate = (state = INITIAL_STATE.returnDate, action) => {
     }
 };
 
-const startDate = (state = INITIAL_STATE.startDate, action) => {
+const startDate = (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case START_DATE_CHANGE:
             return action.payload;

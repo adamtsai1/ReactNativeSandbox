@@ -3,10 +3,14 @@ import React, { Component } from 'react';
 import { Text } from 'react-native';
 import { connect } from 'react-redux';
 
-// Components
+// App
 import { Page } from '../../../components';
 
 class RequestHistoryPageComponent extends Component {
+    componentWillMount() {
+
+    }
+
     render() {
         return (
             <Page title="Request History" navigate={this.props.navigation.navigate}>

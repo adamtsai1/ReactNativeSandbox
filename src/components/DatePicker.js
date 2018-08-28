@@ -2,11 +2,16 @@ import { DatePicker } from 'native-base';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { View } from 'react-native';
+import moment from 'moment/src/moment';
 import { Colors } from '../utility';
 
 export default class DatePickerComponent extends Component {
     setDate(value) {
         this.datepicker.setDate(value);
+    }
+
+    clearDate() {
+        this.datepicker.clearDate();
     }
 
     render() {
@@ -25,7 +30,7 @@ export default class DatePickerComponent extends Component {
                     placeHolderTextStyle={datepickerPlaceholderTextStyle}
                     ref={datepicker => { this.datepicker = datepicker; }}
                     textStyle={datepickerTextStyle}
-                    formatChosenDate={date => [date.getFullYear(), date.getMonth() + 1, date.getDate()].join('-')}
+                    formatChosenDate={date => (moment(date).isValid() ? [date.getFullYear(), date.getMonth() + 1, date.getDate()].join('-') : '')}
                     onDateChange={this.props.onDateChange}
                 />
             </View>
