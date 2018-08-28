@@ -1,14 +1,16 @@
 // Dependencies
+import { Formik } from 'formik';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { Alert, View } from 'react-native';
 import { connect } from 'react-redux';
+import * as Yup from 'yup';
 
 // Components
 import {
     Button,
     Container,
-    Form,
+    FormTextbox,
     Label,
     Page,
     PageBody,
@@ -17,8 +19,6 @@ import {
 
 // Actions
 import {
-    changePasswordText,
-    changeUserNameText,
     initializeLogin,
     submitLogin,
 } from '../../../actions/authActions';
@@ -30,9 +30,6 @@ class LoginPageComponent extends Component {
     constructor() {
         super();
         this.initializePage = this.initializePage.bind(this);
-        this.onPasswordChanged = this.onPasswordChanged.bind(this);
-        this.onSubmitPressed = this.onSubmitPressed.bind(this);
-        this.onUserNameChanged = this.onUserNameChanged.bind(this);
     }
 
     componentDidMount() {
@@ -45,16 +42,12 @@ class LoginPageComponent extends Component {
         }
     }
 
-    onPasswordChanged(text) {
-        this.props.changePasswordText(text);
+    _handleSubmit(values) {
+        Alert.alert(JSON.stringify(values));
     }
 
     onSubmitPressed() {
         this.props.submitLogin(this.props.userName, this.props.password);
-    }
-
-    onUserNameChanged(text) {
-        this.props.changeUserNameText(text);
     }
 
     initializePage() {
@@ -74,40 +67,69 @@ class LoginPageComponent extends Component {
         return (
             <Page title="Login">
                 <PageBody>
-                    <Form>
-                        <Label>User Name</Label>
-                        <Container style={{ marginBottom: 16 }}>
-                            <Textbox
-                                autoCapitalize="none"
-                                ref={(input) => { this.userNameInput = input; }}
-                                value={this.props.userName}
-                                onChangeText={this.onUserNameChanged}
-                            />
-                        </Container>
+                    <Formik
+                        initialValues={{ userName: '', password: '' }}
+                        onSubmit={this._handleSubmit}
+                        validationSchema={Yup.object().shape({
+                            userName: Yup.string()
+                                .email('User Name must be a valid email.')
+                                .required('User Name is required.'),
+                            password: Yup.string()
+                                .required('Password is required.'),
+                        })}
+                        render={({
+                            errors,
+                            values,
+                            handleSubmit,
+                            setFieldTouched,
+                            setFieldValue,
+                            touched,
+                        }) => (
+                            <View>
+                                <View style={{ marginBottom: 26 }}>
+                                    <FormTextbox
+                                        errorMessage={touched.userName && errors.userName}
+                                        labelText="User Name"
+                                        ref={input => (this.userNameInput = input)}
+                                        textboxProps={{
+                                            autoCapitalize: 'none',
+                                            name: 'userName',
+                                            value: values.userName,
+                                            onChangeText: setFieldValue,
+                                        }}
+                                    />
 
-                        <Label>Password</Label>
-                        <Container>
-                            <Textbox
-                                secureTextEntry
-                                value={this.props.password}
-                                onChangeText={this.onPasswordChanged}
-                            />
-                        </Container>
-                    </Form>
+                                    <FormTextbox
+                                        errorMessage={touched.userName && errors.password}
+                                        labelText="Password"
+                                        ref={input => (this.passwordInput = input)}
+                                        textboxProps={{
+                                            autoCapitalize: 'none',
+                                            name: 'password',
+                                            secureTextEntry: true,
+                                            value: values.password,
+                                            onChangeText: setFieldValue,
+                                        }}
+                                    />
+                                </View>
 
-                    {errorMessage}
+                                {errorMessage}
 
-                    <Container style={{ marginBottom: 8 }}>
-                        <Button disabled={submitButtonDisabled} onPress={this.onSubmitPressed}>
-                            Submit
-                        </Button>
-                    </Container>
+                                <Container style={{ marginBottom: 8 }}>
+                                    {/* <Button disabled={submitButtonDisabled} onPress={handleSubmit}> */}
+                                    <Button onPress={handleSubmit}>
+                                        Submit
+                                    </Button>
+                                </Container>
 
-                    <Container>
-                        <Button onPress={() => this.props.navigation.navigate('PasswordReset')}>
-                            Forgot Password?
-                        </Button>
-                    </Container>
+                                <Container>
+                                    <Button onPress={() => this.props.navigation.navigate('PasswordReset')}>
+                                        Forgot Password?
+                                    </Button>
+                                </Container>
+                            </View>
+                        )}
+                    />
                 </PageBody>
             </Page>
         );
@@ -125,8 +147,6 @@ LoginPageComponent.propTypes = {
     userName: PropTypes.string,
 
     // Actions
-    changePasswordText: PropTypes.func,
-    changeUserNameText: PropTypes.func,
     submitLogin: PropTypes.func,
 };
 
@@ -149,8 +169,6 @@ const mapStateToProps = (state) => ({
 });
 
 export const LoginPage = connect(mapStateToProps, {
-    changePasswordText,
-    changeUserNameText,
     initializeLogin,
     submitLogin,
 })(LoginPageComponent);

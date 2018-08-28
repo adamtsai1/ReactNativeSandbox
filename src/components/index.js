@@ -4,6 +4,7 @@ export * from './Button';
 export * from './CircleWithLabel';
 export * from './Container';
 export * from './Form';
+export * from './FormTextbox';
 export * from './FormRow';
 export * from './Header';
 export * from './Label';

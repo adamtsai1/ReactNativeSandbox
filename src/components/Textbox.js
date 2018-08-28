@@ -22,7 +22,7 @@ export class Textbox extends Component {
                 secureTextEntry={this.props.secureTextEntry}
                 style={textboxStylesUpdated}
                 value={this.props.value}
-                onChangeText={this.props.onChangeText}
+                onChangeText={(value) => this.props.onChangeText(this.props.name, value)}
             />
         );
     }
@@ -30,6 +30,7 @@ export class Textbox extends Component {
 
 Textbox.propTypes = {
     editable: PropTypes.bool,
+    name: PropTypes.string,
     secureTextEntry: PropTypes.bool,
     value: PropTypes.string,
     onChangeText: PropTypes.func,
