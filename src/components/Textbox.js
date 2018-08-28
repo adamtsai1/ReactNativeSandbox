@@ -22,6 +22,7 @@ export class Textbox extends Component {
                 secureTextEntry={this.props.secureTextEntry}
                 style={textboxStylesUpdated}
                 value={this.props.value}
+                onBlur={() => this.props.onTouch(this.props.name)}
                 onChangeText={(value) => this.props.onChangeText(this.props.name, value)}
             />
         );
@@ -34,6 +35,7 @@ Textbox.propTypes = {
     secureTextEntry: PropTypes.bool,
     value: PropTypes.string,
     onChangeText: PropTypes.func,
+    onTouch: PropTypes.func,
 };
 
 const styles = {

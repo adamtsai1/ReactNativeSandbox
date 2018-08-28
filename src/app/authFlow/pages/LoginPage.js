@@ -2,7 +2,7 @@
 import { Formik } from 'formik';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Alert, View } from 'react-native';
+import { View } from 'react-native';
 import { connect } from 'react-redux';
 import * as Yup from 'yup';
 
@@ -14,7 +14,6 @@ import {
     Label,
     Page,
     PageBody,
-    Textbox,
 } from '../../../components';
 
 // Actions
@@ -30,6 +29,7 @@ class LoginPageComponent extends Component {
     constructor() {
         super();
         this.initializePage = this.initializePage.bind(this);
+        this.submit = this.submit.bind(this);
     }
 
     componentDidMount() {
@@ -42,12 +42,8 @@ class LoginPageComponent extends Component {
         }
     }
 
-    _handleSubmit(values) {
-        Alert.alert(JSON.stringify(values));
-    }
-
-    onSubmitPressed() {
-        this.props.submitLogin(this.props.userName, this.props.password);
+    submit(values) {
+        this.props.submitLogin(values.userName, values.password);
     }
 
     initializePage() {
@@ -57,7 +53,6 @@ class LoginPageComponent extends Component {
 
     render() {
         const { errorMessageContainerStyle, errorMessageTextStyle } = styles;
-        const submitButtonDisabled = this.props.userName.length === 0 || this.props.password.length === 0;
         const errorMessage = this.props.errorMessage.length > 0 ? (
             <Container style={errorMessageContainerStyle}>
                 <Label style={errorMessageTextStyle}>{this.props.errorMessage}</Label>
@@ -69,7 +64,7 @@ class LoginPageComponent extends Component {
                 <PageBody>
                     <Formik
                         initialValues={{ userName: '', password: '' }}
-                        onSubmit={this._handleSubmit}
+                        onSubmit={this.submit}
                         validationSchema={Yup.object().shape({
                             userName: Yup.string()
                                 .email('User Name must be a valid email.')
@@ -79,11 +74,12 @@ class LoginPageComponent extends Component {
                         })}
                         render={({
                             errors,
-                            values,
                             handleSubmit,
+                            isValid,
                             setFieldTouched,
                             setFieldValue,
                             touched,
+                            values,
                         }) => (
                             <View>
                                 <View style={{ marginBottom: 26 }}>
@@ -96,11 +92,12 @@ class LoginPageComponent extends Component {
                                             name: 'userName',
                                             value: values.userName,
                                             onChangeText: setFieldValue,
+                                            onTouch: setFieldTouched,
                                         }}
                                     />
 
                                     <FormTextbox
-                                        errorMessage={touched.userName && errors.password}
+                                        errorMessage={touched.password && errors.password}
                                         labelText="Password"
                                         ref={input => (this.passwordInput = input)}
                                         textboxProps={{
@@ -109,6 +106,7 @@ class LoginPageComponent extends Component {
                                             secureTextEntry: true,
                                             value: values.password,
                                             onChangeText: setFieldValue,
+                                            onTouch: setFieldTouched,
                                         }}
                                     />
                                 </View>
@@ -116,8 +114,7 @@ class LoginPageComponent extends Component {
                                 {errorMessage}
 
                                 <Container style={{ marginBottom: 8 }}>
-                                    {/* <Button disabled={submitButtonDisabled} onPress={handleSubmit}> */}
-                                    <Button onPress={handleSubmit}>
+                                    <Button disabled={!isValid} onPress={handleSubmit}>
                                         Submit
                                     </Button>
                                 </Container>
